@@ -9,7 +9,7 @@ This repo depends on
     <li>quickshell</li>
     <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
 </ul>
-So make sure to install these.<br>
+So make sure to install those.<br>
 Also, for now, I made this inside archlinux, with kitty, bash and without any graphical login manager(like sddm), so I don't know if this works in other setups.
 
 ## Installation
