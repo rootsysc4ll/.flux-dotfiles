@@ -21,8 +21,8 @@ Inside the home(<code>~</code>) directory(it needs to be there, or you can modif
 
 ## Post-install
 First, add this symlink: `ln -s -T ~/.flux-dotfiles/iris/ ~/.config/iris`<br>
-Then, don't forget to increase the privileges of <code>start.sh</code>: <code>chmod +x ~/.flux-dotfiles/start.sh</code> 
-And then add this to your .bashrc:
+After that, don't forget to increase the privileges of <code>start.sh</code>: <code>chmod +x ~/.flux-dotfiles/start.sh</code><br>
+Then add this to your .bashrc:
 ```
 if uwsm check may-start; then
     ~/.flux-dotfiles/start.sh
