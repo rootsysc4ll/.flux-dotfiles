@@ -4,10 +4,11 @@ I don't know how to make install-scripts yet, but here is a guide to properly in
 
 ## Details
 This repo depends on
- - Hyperland
- - quickshell
- - iris (AUR, use yay or paru)<br>
-    `paru -S iris`<br>
+<ul>
+    <li>Hyprland</li>
+    <li>quickshell</li>
+    <li>iris (AUR, use yay or paru): `paru -S iris`</li>
+</ul>
 Also, for now, I made this inside archlinux, with kitty, bash and without any graphical login manager(like sddm), so I don't know if this works in other setups
 
 ## Post-install scripts
