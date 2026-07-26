@@ -49,8 +49,6 @@ Inside <code>~/.flux-dotfiles</code> create a file called <code>Theme.json</code
 ```
 
 ## Recomendations
-<ul>
-    <li>Read <code>keybindings.lua<code> to understand the theme array</li>
-    <li>Go visit [Iris repo](https://github.com/Harman1307/iris) and [awww guide](https://linuxcommandlibrary.com/man/awww) to understand the color scheme implementation</li>
-    <li>Also visit [Hyprland wiki](https://wiki.hypr.land/) and [Quickshell wiki](https://quickshell.org/) to understand the dotfile as a whole</li>
-</ul>
+ - Read <code>keybindings.lua<code> to understand the theme array
+ - Go visit [Iris repo](https://github.com/Harman1307/iris) and [awww guide](https://linuxcommandlibrary.com/man/awww) to understand the color scheme implementation
+ - Also visit [Hyprland wiki](https://wiki.hypr.land/) and [Quickshell wiki](https://quickshell.org/) to understand the dotfile as a whole
