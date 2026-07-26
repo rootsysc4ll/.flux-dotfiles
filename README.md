@@ -7,6 +7,7 @@ This repo depends on the following packages:
 <ul>
     <li>Hyprland</li>
     <li>quickshell</li>
+    <li>awww</li>
     <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
 </ul>
 So make sure to install them.<br>
@@ -31,3 +32,25 @@ fi
 cat ~/.cache/iris/sequences
 ```
 Now you're done!
+
+## How to create themes
+Inside <code>~/.flux-dotfiles</code> create a file called <code>Theme.json</code> with this structure:
+```
+[
+    {
+        "wpPath": "path/to/Wallpaper1.png",
+        "mode": "light"
+    },
+    {
+        "wpPath": "path/to/Wallpaper2.png",
+        "mode": "dark"
+    }
+]
+```
+
+## Recomendations
+<ul>
+    <li>Read <code>keybindings.lua<code> to understand the theme array</li>
+    <li>Go visit <hl>https://github.com/Harman1307/iris<hl> and <hl>https://linuxcommandlibrary.com/man/awww<hl> to understand the color scheme implementation</li>
+    <li>Go visit <hl>https://wiki.hypr.land/<hl> and <hl>https://quickshell.org/</hl> to understand the dotfile as a whole</li>
+</ul>
