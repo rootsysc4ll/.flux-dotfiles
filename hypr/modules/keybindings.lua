@@ -12,9 +12,9 @@ hl.bind(mainMod .. " + M",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(Menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+--hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("pkill qs || " .. Bar))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Bar .. " kill" .. " || " .. Bar)) -- open quickshell bar
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
@@ -59,13 +59,17 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- Manage brightness via normal keys
 hl.bind(mainMod .. " + SHIFT + up", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%+"), { locked = true, repeating = true })
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%-"),
-  { locked = true, repeating = true })
+{ locked = true, repeating = true })
+
+------------
+-- CUSTOM --
+------------
 
 -- Swap windows in the same workspace
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "left" }))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "down" }))
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.swap({ direction = "left" }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.swap({ direction = "right" }))
+hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.swap({ direction = "up" }))
+hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Wallpaper/Theme management
 for i = 1, #Theme do
@@ -82,15 +86,18 @@ hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o ~/Pictures/Scre
 
 -- hyprsunset management
 local temperature = 4500
-local changeRate = 100
+local changeRate = 50
 
 local function changeTemperature(direction)
   if (temperature + (direction * changeRate) < 6000) then
     temperature = temperature + (direction * changeRate)
   end
-  return hl.dsp.exec_cmd("hyprctl hyprsunset temperature " .. temperature)
+  hl.dispatch(hl.dsp.exec_cmd("hyprctl hyprsunset temperature " .. temperature))
 end
 
 hl.bind(subMod .. " + F", hl.dsp.exec_cmd("pkill hyprsunset || " .. "hyprsunset -t " .. temperature))
-hl.bind(subMod .. " + SHIFT + up", changeTemperature(-1))
-hl.bind(subMod .. " + SHIFT + minus", changeTemperature(1))
+hl.bind(subMod .. " + SHIFT + up", function () changeTemperature(-1) end)
+hl.bind(subMod .. " + SHIFT + down", function () changeTemperature(1) end)
+
+-- Open/Close power options
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(PowerOptions .. " kill" .. " || " .. PowerOptions))
