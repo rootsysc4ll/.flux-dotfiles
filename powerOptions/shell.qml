@@ -1,8 +1,8 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
+
 
 import "."
 
@@ -30,21 +30,18 @@ ShellRoot {
             readonly property variant cellsIds: ["reboot", "lock", "shutdown", "sleep", "uefi"]
             property string selected: cellsIds[0]
 
-            Process { id: rebootProc; command:   ["sh", "-c", "systemctl reboot"];                           onExited: Qt.quit(); }
-            Process { id: lockProc; command:     ["sh", "-c", "hyprlock -c ~/.flux-dotfiles/hyprlock.conf"]; onExited: Qt.quit(); }
-            Process { id: shutdownProc; command: ["sh", "-c", "systemctl poweroff"];                         onExited: Qt.quit(); }
-            Process {
-                id: sleepProc; 
-                command: ["sh", "-c", "hyprlock -c ~/.flux-dotfiles/hyprlock.conf --immediate-render & systemctl sleep"];
-                onStarted: startDetached()
+            Process { id: rebootProc; command:   ["sh", "-c", "systemctl reboot"];                  onExited: Qt.quit(); }
+            Process { id: lockProc; command:     ["sh", "-c", "qs -c ~/.flux-dotfiles/lock/"];      onExited: Qt.quit(); }
+            Process { id: shutdownProc; command: ["sh", "-c", "systemctl poweroff"];                onExited: Qt.quit(); }
+            Process { id: sleepProc; 
+                command: ["sh", "-c", "systemctl sleep && qs -c ~/.flux-dotfiles/lock/"];           onExited: Qt.quit();
             }
-            Process { id: toUefiProc; command:   ["sh", "-c", "systemctl reboot --firmware-setup"];          onExited: Qt.quit(); }
+            Process { id: toUefiProc; command:   ["sh", "-c", "systemctl reboot --firmware-setup"]; onExited: Qt.quit(); }
 
             anchors.fill: parent
             focus: true
             Keys.onPressed: (event) => {
                 if (event.key === Qt.Key_Escape) {
-                    console.log("Escape pressed!")
                     Qt.quit()
                 }
             }
@@ -58,10 +55,8 @@ ShellRoot {
                 focus: grid.selected === grid.cellsIds[0]
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Down || event.key === Qt.Key_S) {
-                        console.log("Down pressed!")
                         grid.selected = grid.cellsIds[2]
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Space) {
-                        console.log("Return pressed!")
                         if (!rebootProc.running) { rebootProc.running = true }
                     }
                 }
@@ -93,10 +88,8 @@ ShellRoot {
                 focus: grid.selected === grid.cellsIds[1]
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Right || event.key === Qt.Key_D) {
-                        console.log("Right pressed!")
                         grid.selected = grid.cellsIds[2]
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Space) {
-                        console.log("Return pressed!")
                         if (!lockProc.running) { lockProc.running = true }
                     }
                 }
@@ -129,19 +122,14 @@ ShellRoot {
                 focus: grid.selected === grid.cellsIds[2]
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Left || event.key === Qt.Key_A) {
-                        console.log("Left pressed!")
                         grid.selected = grid.cellsIds[1]
                     } else if (event.key === Qt.Key_Right || event.key === Qt.Key_D) {
-                        console.log("Right pressed!")
                         grid.selected = grid.cellsIds[3]
                     } else if (event.key === Qt.Key_Up || event.key === Qt.Key_W) {
-                        console.log("Up pressed!")
                         grid.selected = grid.cellsIds[0]
                     } else if (event.key === Qt.Key_Down || event.key === Qt.Key_S) {
-                        console.log("Down pressed!")
                         grid.selected = grid.cellsIds[4]
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Space) {
-                        console.log("Return pressed!")
                         if (!shutdownProc.running) { shutdownProc.running = true }
                     }
                 }
@@ -172,11 +160,9 @@ ShellRoot {
                 focus: grid.selected === grid.cellsIds[3]
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Left || event.key === Qt.Key_A) {
-                        console.log("Left pressed!")
                         grid.selected = grid.cellsIds[2]
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Space) {
-                        console.log("Return pressed!")
-                        if (!sleepProc.running) { sleepProc.running = true; Qt.quit(); }
+                        if (!sleepProc.running) { sleepProc.running = true }
                     }
                 }
 
@@ -208,10 +194,8 @@ ShellRoot {
                 focus: grid.selected === grid.cellsIds[4]
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Up || event.key === Qt.Key_W) {
-                        console.log("Up pressed!")
                         grid.selected = grid.cellsIds[2]
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Space) {
-                        console.log("Return pressed!")
                         if (!toUefiProc.running) { toUefiProc.running = true }
                     }
                 }

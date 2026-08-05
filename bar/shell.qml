@@ -36,10 +36,10 @@ ShellRoot {
 			RowLayout {
 				spacing: 30
 			
-				Brightness {}
-				Volume {}
-				Network {}
 				Battery {}
+				Network {}
+				Volume {}
+				Brightness {}
 			}
 		}
 
