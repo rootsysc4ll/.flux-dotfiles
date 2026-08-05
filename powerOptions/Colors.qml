@@ -6,7 +6,9 @@ import QtQuick
 import QtCore
 
 Singleton {
-    property var colors: ({})
+    id: colorsObject
+    property var colors: {}
+    property bool isLoaded: false
     
     FileView {
         id: dataFile
@@ -15,8 +17,9 @@ Singleton {
         printErrors: true
         watchChanges: true
         onFileChanged: reload()
-        onLoaded: {
-            colors = JSON.parse(text().trim())
+        onLoaded: { 
+            colors = JSON.parse(text().trim()) 
+            isLoaded = true
         }
     }
 }
