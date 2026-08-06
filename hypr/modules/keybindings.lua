@@ -7,14 +7,14 @@ local subMod  = "ALT"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(Terminal))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(Menu))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Bar .. " kill" .. " || " .. Bar)) -- open quickshell bar
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(PowerOptions .. " kill" .. " || " .. PowerOptions)) -- Open/Close power options
 hl.bind(mainMod .. " + Escape", hl.dsp.window.close())
 hl.bind(mainMod .. " + M",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(Menu))
---hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Bar .. " kill" .. " || " .. Bar)) -- open quickshell bar
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
@@ -98,6 +98,3 @@ end
 hl.bind(subMod .. " + F", hl.dsp.exec_cmd("pkill hyprsunset || " .. "hyprsunset -t " .. temperature))
 hl.bind(subMod .. " + SHIFT + up", function () changeTemperature(-1) end)
 hl.bind(subMod .. " + SHIFT + down", function () changeTemperature(1) end)
-
--- Open/Close power options
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(PowerOptions .. " kill" .. " || " .. PowerOptions))

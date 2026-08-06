@@ -11,8 +11,8 @@ TextInput {
     maximumLength: maximumPasswLen
     echoMode: TextInput.Password
     passwordCharacter: "^"
-    color: lock.colors["bg"]
-    selectedTextColor: lock.colors['fg'] 
+    color: lock.colors["fg"]
+    selectedTextColor: lock.colors['bg'] 
     selectionColor: lock.colors["accent"]
     cursorDelegate: Rectangle { width: 2; color: lock.colors["bg"]; }
     font.pixelSize: passwPixelSize

@@ -5,7 +5,7 @@ import Quickshell.Services.Pam
 Scope {
     property string currentText: ""
     property bool unlockInProgress: false
-    property bool showFailure: false
+	property bool showFailure: false
 
     signal unlocked()
     signal failed()
