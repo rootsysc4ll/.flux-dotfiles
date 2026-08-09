@@ -1,1 +1,2 @@
 singleton Colors 1.0 Colors.qml
+singleton Wallpaper 1.0 Wallpaper.qml

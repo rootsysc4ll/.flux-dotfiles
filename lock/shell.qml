@@ -1,15 +1,17 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 
 import "./Colors.qml"
+import "./Wallpaper.qml"
 import "./modules"
 
 ShellRoot {
     LockContext { id: lockContext }
 
-    Loader { sourceComponent: Colors.isLoaded ? lockComponent : null }
+    Loader { sourceComponent: Colors.isLoaded && Wallpaper.isLoaded ? lockComponent : null }
     Component {
         id: lockComponent
 
@@ -22,10 +24,11 @@ ShellRoot {
                 "fg": Colors.colors.fg,
                 "accent": Colors.colors.accent
             }
+            readonly property var wallpaperPath: Wallpaper.wallpaperPath
 
             WlSessionLockSurface {
-                color: lock.colors['bg']
-
+                WallpaperImage {}
+                
                 TextStrips {}
 
                 ColumnLayout {

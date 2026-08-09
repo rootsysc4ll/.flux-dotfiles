@@ -37,5 +37,7 @@ Rectangle {
         }
     }
 
-    Process { id: sleepProc; command: ["sh", "-c", "systemctl sleep && qs -c ~/.flux-dotfiles/lock/"] }
+    Process { id: sleepProc; 
+        command: ["sh", "-c", "systemctl sleep && qs -c ~/.flux-dotfiles/lock/"]
+    }
 }

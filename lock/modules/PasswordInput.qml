@@ -10,7 +10,7 @@ TextInput {
     
     maximumLength: maximumPasswLen
     echoMode: TextInput.Password
-    passwordCharacter: "^"
+    passwordCharacter: "|"
     color: lock.colors["fg"]
     selectedTextColor: lock.colors['bg'] 
     selectionColor: lock.colors["accent"]

@@ -6,7 +6,6 @@ import QtQuick
 import QtCore
 
 Singleton {
-    id: colorsObject
     property var colors: {}
     property bool isLoaded: false
     
