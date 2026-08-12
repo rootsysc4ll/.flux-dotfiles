@@ -8,6 +8,9 @@ This repo depends on the following packages:
     <li>Hyprland</li>
     <li>quickshell</li>
     <li>awww</li>
+    <li>hyprshot</li>
+    <li>hyprsunset</li>
+    <li>brightnessctl</li>
     <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
 </ul>
 So make sure to install them.<br>
@@ -49,6 +52,6 @@ Inside <code>~/.flux-dotfiles</code> create a file called <code>Theme.json</code
 ```
 
 ## Recomendations
- - Read `keybindings.lua` to understand the theme array
+ - Read `keybindings.lua` to understand all the keybindings, specially the theme switching one
  - Go visit [Iris repo](https://github.com/Harman1307/iris) and [awww guide](https://linuxcommandlibrary.com/man/awww) to understand the color scheme implementation
  - Also visit [Hyprland wiki](https://wiki.hypr.land/) and [Quickshell wiki](https://quickshell.org/) to understand the dotfile as a whole

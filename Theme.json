@@ -4,6 +4,10 @@
         "mode": "light"
     },
     {
+        "wpPath": "~/Pictures/Wallpapers/chidaruma.png",
+        "mode": "light"
+    },
+    {
         "wpPath": "~/Pictures/Wallpapers/radhan.png",
         "mode": "dark"
     },

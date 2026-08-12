@@ -26,7 +26,7 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
   local key = i % 10 -- 10 maps to key 0
-  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }), { release = true })
   hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
@@ -61,10 +61,6 @@ hl.bind(mainMod .. " + SHIFT + up", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%-"),
 { locked = true, repeating = true })
 
-------------
--- CUSTOM --
-------------
-
 -- Swap windows in the same workspace
 hl.bind(mainMod .. " + CTRL + left", hl.dsp.window.swap({ direction = "left" }))
 hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.swap({ direction = "right" }))
@@ -86,7 +82,7 @@ hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o ~/Pictures/Scre
 
 -- hyprsunset management
 local temperature = 4500
-local changeRate = 50
+local changeRate = 100
 
 local function changeTemperature(direction)
   if (temperature + (direction * changeRate) < 6000) then
@@ -95,6 +91,6 @@ local function changeTemperature(direction)
   hl.dispatch(hl.dsp.exec_cmd("hyprctl hyprsunset temperature " .. temperature))
 end
 
-hl.bind(subMod .. " + F", hl.dsp.exec_cmd("pkill hyprsunset || " .. "hyprsunset -t " .. temperature))
-hl.bind(subMod .. " + SHIFT + up", function () changeTemperature(-1) end)
-hl.bind(subMod .. " + SHIFT + down", function () changeTemperature(1) end)
+hl.bind(subMod .. " + F", hl.dsp.exec_cmd("pkill hyprsunset || " .. "hyprsunset -t " .. temperature), { release = true })
+hl.bind(subMod .. " + F + up", function () changeTemperature(-1) end, { repeating = true })
+hl.bind(subMod .. " + F + down", function () changeTemperature(1) end, { repeating = true })
