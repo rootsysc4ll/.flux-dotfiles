@@ -6,10 +6,11 @@ I don't know how to make install-scripts yet, but here is a guide to properly in
 This repo depends on the following packages:
 <ul>
     <li>Hyprland</li>
-    <li>quickshell</li>
-    <li>awww</li>
     <li>hyprshot</li>
     <li>hyprsunset</li>
+    <li>uwsm</li>
+    <li>quickshell</li>
+    <li>awww</li>
     <li>brightnessctl</li>
     <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
 </ul>
