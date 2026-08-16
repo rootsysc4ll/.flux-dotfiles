@@ -13,6 +13,7 @@ This repo depends on the following packages:
     <li>awww</li>
     <li>brightnessctl</li>
     <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
+    <li>JetBrains Mono Nerd and Material Symbols</li>
 </ul>
 So make sure to install them.<br>
 Also, for now, I made this inside archlinux, with kitty, bash and without any graphical login manager(like sddm), so I don't know if this works in other setups.
