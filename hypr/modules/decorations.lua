@@ -3,7 +3,7 @@
 -----------------------
 
 --require("utils.Colors")
-require("../../.cache/iris/colors-hypr.lua")
+require("../.cache/cwal/colors-hyprland.lua")
 
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
