@@ -26,7 +26,7 @@ git clone https://github.com/rootsysc4ll/.flux-dotfiles.git
 Inside the home(<code>~</code>) directory(it needs to be there, or you can modify the paths inside the source code to fit your needs).
 
 ## Post-install
-First, add this symlink: `ln -s -T ~/.flux-dotfiles/cwal/ ~/.config/cwal`<br>
+First, add this symlink: `ln -s -T ~/.flux-dotfiles/iris/ ~/.config/iris`<br>
 After that, don't forget to increase the privileges of <code>start.sh</code>: <code>chmod +x ~/.flux-dotfiles/start.sh</code><br>
 Then add this to your .bashrc:
 ```

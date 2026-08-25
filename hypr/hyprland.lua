@@ -1,4 +1,5 @@
 -- https://wiki.hypr.land/Configuring/Start/
+require("utils.Theme")
 
 require("modules.monitors")
 require("modules.myPrograms")

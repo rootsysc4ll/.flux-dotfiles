@@ -2,8 +2,6 @@
 ---- KEYBINDINGS ----
 ---------------------
 
-require("utils.Theme")
-
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local subMod  = "ALT"
 
