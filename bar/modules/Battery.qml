@@ -3,8 +3,6 @@ import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
 
-import ".."
-
 RowLayout {
     spacing: 3
 
@@ -21,10 +19,10 @@ RowLayout {
 
     Text {
         text: icon
-        color: charging ? Colors.colors.green
-                        : (level <= 30) ? Colors.colors.orange
-                        : (level <= 15) ? Colors.colors.red
-                        : Colors.colors.green
+        color: charging ? bar.colors["green"]
+                        : (level <= 40) ? "yellow"
+                        : (level <= 15) ? "red"
+                        : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -33,10 +31,10 @@ RowLayout {
 
     Text {
         text: level + "%"
-        color: charging ? Colors.colors.green
-                        : (level <= 30) ? Colors.colors.orange
-                        : (level <= 15) ? Colors.colors.red
-                        : Colors.colors.green
+        color: charging ? bar.colors["green"]
+                        : (level <= 40) ? "yellow"
+                        : (level <= 15) ? "red"
+                        : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

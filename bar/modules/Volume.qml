@@ -3,8 +3,6 @@ import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
 
-import ".."
-
 RowLayout {
     spacing: 3
 
@@ -27,7 +25,7 @@ RowLayout {
  
     Text {
         text: icon
-        color: (!ready || muted || vol < 33) ? Colors.colors.yellow : Colors.colors.green
+        color: (!ready || muted || vol < 33) ? "yellow" : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -41,7 +39,7 @@ RowLayout {
 
             return vol + "%" 
         }
-        color: (!ready || muted || vol < 33) ? Colors.colors.yellow : Colors.colors.green
+        color: (!ready || muted || vol < 33) ? "yellow" : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

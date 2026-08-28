@@ -3,7 +3,9 @@
 -----------------------
 
 --require("utils.Colors")
-require("../../.cache/iris/colors-hypr.lua")
+local home = os.getenv("HOME")
+package.path = package.path .. ";" .. home .. "/.cache/iris/?.lua;" .. home .. "/.cache/iris/?/init.lua"
+require("colors-hypr")
 
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/

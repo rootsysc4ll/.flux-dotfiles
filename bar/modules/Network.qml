@@ -3,8 +3,6 @@ import Quickshell.Networking
 import QtQuick
 import QtQuick.Layouts
 
-import ".."
-
 RowLayout {
     spacing: 10 
 
@@ -28,7 +26,7 @@ RowLayout {
 
     Text {
         text: icon 
-        color: (!wifiEnabled || !activeNetwork) ? Colors.colors.red : Colors.colors.green
+        color: (!wifiEnabled || !activeNetwork) ? "red" : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -42,7 +40,7 @@ RowLayout {
 
             return activeNetwork.name
         }
-        color: (!wifiEnabled || !activeNetwork) ? Colors.colors.red : Colors.colors.green
+        color: (!wifiEnabled || !activeNetwork) ? "red" : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

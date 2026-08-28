@@ -2,10 +2,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import ".."
-
 RowLayout {
-    anchors.centerIn: parent
     spacing: 10
 
     SystemClock {
@@ -15,7 +12,7 @@ RowLayout {
 
     Text {
         text: Qt.formatDateTime(clock.date, "MMM - ddd")
-        color: Colors.colors.accent
+        color: bar.colors["accent"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             letterSpacing: -1
@@ -26,7 +23,7 @@ RowLayout {
 
     Text {
         text: Qt.formatDateTime(clock.date, "hh:mm")
-        color: Colors.colors.accent
+        color: bar.colors["accent"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             letterSpacing: -1

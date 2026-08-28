@@ -3,8 +3,6 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
-import ".."
-
 RowLayout {
     readonly property string device_path: "/sys/class/backlight/intel_backlight"
     property int current: 0
@@ -51,7 +49,7 @@ RowLayout {
 
     Text {
         text: icon
-        color: percent < 50 ? Colors.colors.dim : Colors.colors.fg
+        color: percent < 50 ? bar.colors["dim"] : bar.colors["fg"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -60,7 +58,7 @@ RowLayout {
 
     Text {
         text: percent + "%"
-        color: percent < 50 ? Colors.colors.dim : Colors.colors.fg
+        color: percent < 50 ? bar.colors["dim"] : bar.colors["fg"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

@@ -3,8 +3,6 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import ".."
-
 RowLayout {
     id: row
     //anchors.centerIn: parent
@@ -22,7 +20,7 @@ RowLayout {
             Text {
                 id: wsNumber
                 text: (index + 1)
-                color: isActive ? Colors.colors.fg : (ws ? Colors.colors.accent : Colors.colors.dim)
+                color: isActive ? bar.colors["fg"] : (ws ? bar.colors["accent"] : bar.colors["dim"])
                 Layout.alignment: Qt.AlignHCenter
                 Layout.bottomMargin: 1
 
