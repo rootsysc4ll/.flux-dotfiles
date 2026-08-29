@@ -37,7 +37,8 @@ Rectangle {
         }
     }
 
-    Process { id: sleepProc; 
-        command: ["sh", "-c", "systemctl sleep && qs -c ~/.flux-dotfiles/lock/"]
+    Process { 
+        id: sleepProc 
+        command: ["sh", "-c", 'LOCK_AND_SLEEP=true XDG_CONFIG_HOME="$HOME/.flux-dotfiles/" QML_IMPORT_PATH="$HOME/.flux-dotfiles/" qs -p $HOME/.flux-dotfiles/lock/shell.qml']
     }
 }
