@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 
 import "./modules"
-import "./Colors.qml"
+import shared
 
 ShellRoot {
     Loader { sourceComponent: Colors.isLoaded ? powerOptionsComponent : null }

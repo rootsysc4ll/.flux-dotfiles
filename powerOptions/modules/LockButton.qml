@@ -37,5 +37,5 @@ Rectangle {
         }
     }
     
-    Process { id: lockProc; command: ["sh", "-c", "qs -c ~/.flux-dotfiles/lock/"] }
+    Process { id: lockProc; command: ["sh", "-c", 'XDG_CONFIG_HOME="$HOME/.flux-dotfiles/" QML_IMPORT_PATH="$HOME/.flux-dotfiles/" qs -p $HOME/.flux-dotfiles/lock/shell.qml'] }
 }

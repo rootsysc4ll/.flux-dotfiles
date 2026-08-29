@@ -4,9 +4,8 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 
-import "./Colors.qml"
-import "./Wallpaper.qml"
 import "./modules"
+import shared
 
 ShellRoot {
     LockContext { id: lockContext }

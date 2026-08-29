@@ -4,7 +4,7 @@
 
 --require("utils.Colors")
 local home = os.getenv("HOME")
-package.path = package.path .. ";" .. home .. "/.cache/iris/?.lua;" .. home .. "/.cache/iris/?/init.lua"
+package.path = package.path .. ";" .. home .. "/.cache/iris/colors-hypr.lua;"
 require("colors-hypr")
 
 

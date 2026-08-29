@@ -6,5 +6,5 @@
 Terminal         = "kitty"
 FileManager      = "dolphin"
 Menu             = "hyprlauncher"
-Bar              = "qs -p $HOME/.flux-dotfiles/bar"
-PowerOptions     = "qs -p ~/.flux-dotfiles/powerOptions/"
+Bar              = [[XDG_CONFIG_HOME="$HOME/.flux-dotfiles/" QML_IMPORT_PATH="$HOME/.flux-dotfiles/" qs -p $HOME/.flux-dotfiles/bar/shell.qml]]
+PowerOptions     = [[XDG_CONFIG_HOME="$HOME/.flux-dotfiles/" QML_IMPORT_PATH="$HOME/.flux-dotfiles/" qs -p $HOME/.flux-dotfiles/powerOptions/shell.qml]]

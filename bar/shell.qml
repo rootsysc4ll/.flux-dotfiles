@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 
 import "./modules"
+import shared
 
 ShellRoot {
 	WlrLayershell.namespace: "quickshell"
@@ -55,6 +56,7 @@ ShellRoot {
 				}
 
 				Rectangle {
+					color: bar.colors["fg"]
 					width: 2
 					height: bar.barHeight - 10
 					Layout.leftMargin: 10
