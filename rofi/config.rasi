@@ -1,0 +1,60 @@
+@theme "/dev/null"
+
+@import "~/.cache/iris/colors-rofi.rasi"
+
+configuration { modes: [ drun ]; }
+
+window {
+  width: 650px;
+  background-color: @background-window;
+  padding: 0.5em;
+}
+
+mainbox {
+  background-color: transparent;
+  spacing: 0.4em;
+  children: [ inputbar, listview ];
+}
+
+inputbar {
+  background-color: transparent;
+  children: [ entry ];
+}
+
+entry {
+  placeholder: "";
+  cursor: pointer;
+  padding: 0.5em 0 0.5em 0.5em;
+}
+
+listview {
+  background-color: transparent;
+  fixed-height: false;
+  lines: 4;
+  fixed-num-lines: false;
+  dynamic: true;
+  scrollbar: false;
+  spacing: 0.5em;
+}
+
+element {
+  font: "JetBrainsMono Nerd";
+  orientation: horizontal;
+  padding: 0.3em;
+  children: [ element-icon, element-text ];
+}
+
+element selected { background-color: @background-selected; }
+
+element-icon {
+  font: inherit;
+  background-color: inherit;
+  size: 2em;
+}
+
+element-text {
+  font: inherit;
+  background-color: inherit;
+  vertical-align: 0.5;
+  margin: 0 0 0 0.4em;
+}

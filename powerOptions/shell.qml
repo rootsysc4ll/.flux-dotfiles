@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
-import "./modules"
+import qs.modules
 import shared
 
 ShellRoot {

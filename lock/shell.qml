@@ -5,7 +5,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
 
-import "./modules"
+import qs.modules
 import shared
 
 ShellRoot {
