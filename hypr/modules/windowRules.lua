@@ -38,6 +38,13 @@ hl.layer_rule({
     blur = true,
     ignore_alpha = false
 })
+
+hl.layer_rule({
+    name  = "rofi-overlay",
+    match = { namespace = "rofi" },
+    blur = true,
+    ignore_alpha = false
+})
 -- overlayLayerRule:set_enabled(false)
 
 -- Hyprland-run windowrule

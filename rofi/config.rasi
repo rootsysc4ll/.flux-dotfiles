@@ -48,13 +48,13 @@ element selected { background-color: @background-selected; }
 
 element-icon {
   font: inherit;
-  background-color: inherit;
+  background-color: transparent;
   size: 2em;
 }
 
 element-text {
   font: inherit;
-  background-color: inherit;
+  background-color: transparent;
   vertical-align: 0.5;
   margin: 0 0 0 0.4em;
 }
