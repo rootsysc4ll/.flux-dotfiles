@@ -9,6 +9,8 @@ This repo depends on the following packages:
     <li>hyprshot</li>
     <li>hyprsunset</li>
     <li>uwsm</li>
+    <li>rofi</li>
+    <li>zsh</li>
     <li>quickshell</li>
     <li>awww</li>
     <li>brightnessctl</li>
@@ -26,16 +28,8 @@ git clone https://github.com/rootsysc4ll/.flux-dotfiles.git
 Inside the home(<code>~</code>) directory(it needs to be there, or you can modify the paths inside the source code to fit your needs).
 
 ## Post-install
-First, add this symlink: `ln -s -T ~/.flux-dotfiles/iris/ ~/.config/iris`<br>
-After that, don't forget to increase the privileges of <code>start.sh</code>: <code>chmod +x ~/.flux-dotfiles/start.sh</code><br>
-Then add this to your .bashrc:
-```
-if uwsm check may-start; then
-    ~/.flux-dotfiles/start.sh
-fi
-
-cat ~/.cache/iris/sequences
-```
+First, add these symlinks: `ln -s -T ~/.flux-dotfiles/iris/ ~/.config/iris` and `ln -s -T ~/.flux-dotfiles/kitty ~/.config/kitty`<br>
+Then copy the .zshrc file in the repo to your home directory<br>
 Now you're done!
 
 ## How to create themes
