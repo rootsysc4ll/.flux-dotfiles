@@ -28,7 +28,7 @@ git clone https://github.com/rootsysc4ll/.flux-dotfiles.git
 Inside the home(<code>~</code>) directory(it needs to be there, or you can modify the paths inside the source code to fit your needs).
 
 ## Post-install
-First, add these symlinks: `ln -s -T ~/.flux-dotfiles/iris/ ~/.config/iris` and `ln -s -T ~/.flux-dotfiles/kitty ~/.config/kitty`<br>
+First, add these symlinks: `ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris` and `ln -s -T ~/.flux-dotfiles/applications/kitty ~/.config/kitty`<br>
 Then copy the .zshrc file in the repo to your home directory<br>
 Now you're done!
 

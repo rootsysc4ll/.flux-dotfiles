@@ -2,7 +2,13 @@
 
 @import "~/.cache/iris/colors-rofi.rasi"
 
-configuration { modes: [ drun ]; }
+configuration { 
+  modi: "drun";       
+  disable-history: true;
+  drun-match-fields: "name";  
+  drun-display-format: "{name}";
+  sort: true;
+}
 
 window {
   width: 650px;

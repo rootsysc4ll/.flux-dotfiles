@@ -1,6 +1,0 @@
-* {
-  background-window: #00000033;
-  background-color: #{bg.strip}99;
-  background-selected: #{dim.strip}99;
-  text-color: #{fg.strip}99;
-}
