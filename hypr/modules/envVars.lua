@@ -5,7 +5,9 @@
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 --  Hyprland
-hl.env("HYPRLAND_CONFIG", "~/.flux-dotfiles/hypr/hyprland.lua")
+local home = os.getenv("HOME")
+hl.env("HYPRLAND_CONFIG", home .. "/.flux-dotfiles/hypr/hyprland.lua")
+hl.env("FLUX", home .. "/.flux-dotfiles")
 
 -- Toolkit backend
 hl.env("GDK_BACKEND", "wayland,x11,*")

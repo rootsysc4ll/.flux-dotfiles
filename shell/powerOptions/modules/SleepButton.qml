@@ -39,6 +39,6 @@ Rectangle {
 
     Process { 
         id: sleepProc 
-        command: ["sh", "-c", 'LOCK_AND_SLEEP=true QML_IMPORT_PATH="$HOME/.flux-dotfiles/shell" qs -p $HOME/.flux-dotfiles/shell/lock/shell.qml']
+        command: ["sh", "-c", 'LOCK_AND_SLEEP=true flux-lock']
     }
 }

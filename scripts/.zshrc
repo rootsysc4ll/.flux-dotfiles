@@ -5,3 +5,5 @@ if uwsm check may-start; then
 fi
 
 cat ~/.cache/iris/sequences
+
+alias ..="cd .."
