@@ -57,7 +57,7 @@
   users.users.${user} = {
     isNormalUser = true;
     description = user;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
@@ -97,6 +97,19 @@
     xdg-desktop-portal-hyprland
     zsh
     psmisc
+    openssl
+
+    nodejs_26
+    sqlite
+
+    dconf
+    virt-manager
+    virt-viewer
+    spice spice-gtk
+    spice-protocol
+    virtio-win
+    win-spice
+    adwaita-icon-theme
 
     btop
     vscodium
@@ -114,6 +127,21 @@
     quickshell
     (python3.pkgs.callPackage ./iris.nix {} )
   ];
+
+  # Virtualization setup
+  programs.dconf.enable = true;
+
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  services.spice-vdagentd.enable = true;
+
   system.stateVersion = "26.05"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
