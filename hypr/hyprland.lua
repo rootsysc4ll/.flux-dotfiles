@@ -1,10 +1,9 @@
 -- https://wiki.hypr.land/Configuring/Start/
-require("utils.Theme")
-
 require("modules.monitors")
 require("modules.myPrograms")
 require("modules.autostart")
 require("modules.envVars")
+require("utils.Theme")
 require("modules.decorations")
 require("modules.windowRules")
 require("modules.input")

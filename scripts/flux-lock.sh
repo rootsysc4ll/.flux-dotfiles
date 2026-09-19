@@ -5,7 +5,7 @@ cleanup() {
 }
 
 trap cleanup INT TERM
-QML_IMPORT_PATH="$FLUX/shell" zsh -c "exec -a flux-lock qs -p $FLUX/shell/lock/shell.qml" &
+QML_IMPORT_PATH="$FLUX/shell" sh -c "exec -a flux-lock qs -p $FLUX/shell/lock/shell.qml" &
 
 QS_PID=$!
 wait "$QS_PID"

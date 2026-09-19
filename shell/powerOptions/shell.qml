@@ -34,7 +34,7 @@ ShellRoot {
                 readonly property int marginLenght: borderWidth * 2
                 readonly property int cellSize: 150
                 readonly property variant cellsIds: ["reboot", "lock", "shutdown", "sleep", "uefi"]
-                property string selected: cellsIds[0]
+                property string selected: cellsIds[2]
 
                 anchors.fill: parent
                 focus: true

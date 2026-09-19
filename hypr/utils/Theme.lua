@@ -1,6 +1,6 @@
 local json = require "utils.json"
 
-local jsonFile = os.getenv("HOME") .. "/.flux-dotfiles/Theme.json"
+local jsonFile = os.getenv("FLUX") .. "/Theme.json"
 io.input(jsonFile)
 
 local jsonData = io.read("*all")
