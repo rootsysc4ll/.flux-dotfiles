@@ -37,5 +37,5 @@ Rectangle {
         }
     }
     
-    Process { id: lockProc; command: ["sh", "-c", 'flux-lock'] }
+    Process { id: lockProc; command: ["fish", "-c", 'flux-lock'] }
 }

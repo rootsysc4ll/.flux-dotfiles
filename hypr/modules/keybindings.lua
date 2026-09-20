@@ -8,8 +8,8 @@ local subMod  = "ALT"
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(Terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(Menu .. " || " .. "pkill rofi")) -- open/close rofi menu
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Bar.close .. " || " .. Bar.open)) -- open quickshell bar
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(PowerOptions.close .. " || " .. PowerOptions.open)) -- Open/Close power options
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Bar)) -- open quickshell bar
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(PowerOptions)) -- Open/Close power options
 hl.bind(mainMod .. " + Escape", hl.dsp.window.close())
 hl.bind(mainMod .. " + M",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))

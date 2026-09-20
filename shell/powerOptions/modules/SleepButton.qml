@@ -39,6 +39,6 @@ Rectangle {
 
     Process { 
         id: sleepProc 
-        command: ["sh", "-c", 'LOCK_AND_SLEEP=true flux-lock']
+        command: ["fish", "-c", 'LOCK_AND_SLEEP=true flux-lock']
     }
 }
