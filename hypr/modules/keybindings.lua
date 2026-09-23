@@ -2,6 +2,8 @@
 ---- KEYBINDINGS ----
 ---------------------
 
+require(os.getenv("FLUX") .. "/theme/Theme")
+
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local subMod  = "ALT"
 

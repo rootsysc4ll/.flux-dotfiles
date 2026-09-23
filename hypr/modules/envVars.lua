@@ -7,7 +7,6 @@
 --  Hyprland
 local home = os.getenv("HOME")
 hl.env("HYPRLAND_CONFIG", home .. "/.flux-dotfiles/hypr/hyprland.lua")
-hl.env("FLUX", home .. "/.flux-dotfiles")
 
 -- Toolkit backend
 hl.env("GDK_BACKEND", "wayland,x11,*")
