@@ -1,3 +1,7 @@
 function flux-theme
-    lua $FLUX/theme/flux-theme.lua $argv
+    set exec_source_dir $PWD
+
+    cd $FLUX/theme
+    lua flux-theme.lua $argv
+    cd $exec_source_dir
 end

@@ -1,14 +1,24 @@
-local theme_dir = os.getenv("FLUX") .. "/theme"
-package.path = theme_dir .. "/?.lua;" .. theme_dir .. "/?/init.lua;" .. package.path
+local themeFile = io.open("Theme.lua")
+if not themeFile then
+    print("Theme file does not exists, creating one")
+
+    local f = io.open("Theme.lua", "w")
+    if f then
+       f:write("Theme = {\n}")
+       f:close()
+    end
+else
+    print("Theme file detected")
+    themeFile:close()
+end
 
 require("Theme")
 
-local theme = Theme
-local themeFileName = theme_dir .. "/Theme.lua" -- this exists for development purposes only
 local args = {...}
+local theme = Theme
 
 local function writeToFile(content)
-    local f = io.open(themeFileName, "w")
+    local f = io.open("Theme.lua", "w")
     if f then
         f:write(content)
         f:close()
@@ -44,7 +54,7 @@ local function createDefaultTheme()
 [[Theme = {
     {
         name = "default",
-        wpPath = "~/.flux-dotfiles/theme/default.png",
+        wpPath = "$FLUX/theme/default.png",
         mode = "dark"
     }
 }]]) then
@@ -87,14 +97,30 @@ local function removeTheme(name)
     end
 end
 
+local function printThemeFile()
+    local f = io.open("Theme.lua")
+    if f then
+        local content = f:read("a")
+        print(content)
+        f:close()
+    else
+        print("Could not open theme file")
+    end
+end
+
 local function cli()
     if args[1] == "default" then
         createDefaultTheme()
+        printThemeFile()
     elseif args[1] == "create" then
         parse()
         createTheme(args[2], args[3], args[4])
+        printThemeFile()
     elseif args[1] == "remove" then
         removeTheme(args[2])
+        printThemeFile()
+    elseif args[1] == "file" then
+        printThemeFile()
     else
         print("Unknown option")
     end

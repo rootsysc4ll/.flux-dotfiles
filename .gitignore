@@ -1,2 +1,4 @@
-Theme.json
+theme/Theme.lua
 nix/hardware-configuration.nix
+
+.vscode
