@@ -10,12 +10,13 @@ This repo depends on the following packages:
     <li>hyprsunset</li>
     <li>uwsm</li>
     <li>rofi</li>
-    <li>zsh</li>
+    <li>fish</li>
     <li>quickshell</li>
     <li>awww</li>
     <li>brightnessctl</li>
+    <li>fastfetch</li>
     <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
-    <li>JetBrains Mono Nerd and Material Symbols</li>
+    <li>ttf-jetbrains-mono-nerd and ttf-material-symbols-variable</li>
 </ul>
 So make sure to install them.<br>
 
@@ -24,29 +25,25 @@ Run
 ```
 git clone https://github.com/rootsysc4ll/.flux-dotfiles.git
 ```
-Inside the home(<code>~</code>) directory(it needs to be there, or you can modify the paths inside the source code to fit your needs).
+Inside the home(<code>~</code>) directory(it needs to be there, or you can modify the $FLUX envvar on the fish config)
 
 ## Post-install
-First, add these symlinks: `ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris` and `ln -s -T ~/.flux-dotfiles/applications/kitty ~/.config/kitty`<br>
-Then copy the .zshrc file in the repo to your home directory<br>
-Now you're done!
+First, add these symlinks: 
+```
+ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
+ln -s -T ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
+ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
+ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
+```
 
 ## How to create themes
-Inside <code>~/.flux-dotfiles</code> create a file called <code>Theme.json</code> with this structure:
-```
-[
-    {
-        "wpPath": "path/to/Wallpaper1.png",
-        "mode": "light"
-    },
-    {
-        "wpPath": "path/to/Wallpaper2.png",
-        "mode": "dark"
-    }
-]
-```
+To create themes, there is a fish function named `flux-theme` that have nearly all the functionalities you will need:<br>
+ - `flux-theme file`: outputs the theme file to the terminal
+ - `flux-theme default`: creates the default theme file, run this in your first use
+ - `flux-theme create [themeName themePath themeMode]`: creates a theme with given args. Notice that themeMode can be dark/light, and,for the path, you can use either absolute or relative paths(make use of the $WP_PATH envvar if you want)
+ - `flux-theme remove themeName`: removes a theme with given name
 
 ## Recomendations
- - Read `keybindings.lua` to understand all the keybindings, specially the theme switching one
+ - Read `keybindings.lua` to understand all the keybindings, specially the theme switching ones
  - Go visit [Iris repo](https://github.com/Harman1307/iris) and [awww guide](https://linuxcommandlibrary.com/man/awww) to understand the color scheme implementation
  - Also visit [Hyprland wiki](https://wiki.hypr.land/) and [Quickshell wiki](https://quickshell.org/) to understand the dotfile as a whole
