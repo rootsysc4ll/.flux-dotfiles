@@ -3,7 +3,7 @@
 cd $HOME
 
 # syncronizing databases
-pacman -Syu
+sudo pacman -Syu
 
 # setting up symlinks
 ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
@@ -14,8 +14,8 @@ ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
 ## installing apps
 
 # general applications
-pacman -S --needed base-devel git
-pacman -S hyprland xdg-desktop-portal-hyprland hyprpolkitagent hyprshot hyprsunset uwsm rofi kitty fish quickshell awww brightnessctl fastfetch ttf-jetbrains-mono-nerd ttf-material-symbols-variable
+sudo pacman -S --needed base-devel git
+sudo pacman -S hyprland xdg-desktop-portal-hyprland hyprpolkitagent hyprshot hyprsunset uwsm rofi kitty fish quickshell awww brightnessctl fastfetch ttf-jetbrains-mono-nerd ttf-material-symbols-variable
 
 # paru
 git clone https://aur.archlinux.org/paru.git
