@@ -21,20 +21,7 @@ This repo depends on the following packages:
 So make sure to install them.<br>
 
 ## Installation
-Run
-```
-git clone https://github.com/rootsysc4ll/.flux-dotfiles.git
-```
-Inside the home(<code>~</code>) directory(it needs to be there, or you can modify the $FLUX envvar on the fish config)
-
-## Post-install
-First, add these symlinks: 
-```
-ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
-ln -s -T ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
-ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
-ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
-```
+Read the installation.txt file for installation instructions
 
 ## How to create themes
 To create themes, there is a fish function named `flux-theme` that have nearly all the functionalities you will need:<br>
