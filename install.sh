@@ -23,15 +23,15 @@ paru -S --noconfirm iris-colors
 chsh -s /bin/fish
 
 ## setting up symlinks
-rm -r ~/.config/iris || ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
-rm -r ~/.config/kitty || ln -s -T ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
+ln -sT ~/.flux-dotfiles/applications/iris/ ~/.config/iris
+ln -sT ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
+ln -sT ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
 rm -r ~/.config/fish || ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
-rm -r ~/.config/fastfetch || ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
 
 ## first run for theme
 cd ~/.flux-dotfiles/theme
 iris -i default.png && lua flux-theme.lua default
 
 ## reboot
-sleep 3
+sleep 5
 sudo systemctl reboot
