@@ -21,7 +21,7 @@ This repo depends on the following packages:
 So make sure to install them.<br>
 
 ## Installation
-Read the installation.txt file for installation instructions
+Run the installation file(not as root) in the home directory and you should be good
 
 ## How to create themes
 To create themes, there is a fish function named `flux-theme` that have nearly all the functionalities you will need:<br>

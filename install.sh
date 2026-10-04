@@ -4,19 +4,20 @@ cd $HOME
 
 ## installing apps
 # general applications
-sudo pacman -Syu
-sudo pacman -S --needed base-devel git
-sudo pacman -S hyprland xdg-desktop-portal-hyprland hyprpolkitagent hyprshot hyprsunset uwsm rofi kitty fish quickshell awww brightnessctl fastfetch ttf-jetbrains-mono-nerd ttf-material-symbols-variable
+sudo pacman -Syu --noconfirm
+sudo pacman -S --noconfirm --needed base-devel git
+sudo pacman -S --noconfirm hyprland xdg-desktop-portal-hyprland hyprpolkitagent hyprshot hyprsunset uwsm rofi kitty fish quickshell awww brightnessctl fastfetch ttf-jetbrains-mono-nerd ttf-material-symbols-variable
 
 # paru
 git clone https://aur.archlinux.org/paru.git
 cd paru
-makepkg -si
+export skipped=true
+makepkg -si --noconfirm
 cd ..
 rm -rf paru
 
 # iris
-paru -S iris-colors
+paru -S --noconfirm iris-colors
 
 ## setting up fish
 chsh -s /bin/fish
@@ -28,7 +29,9 @@ rm -rf ~/.config/fish && ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/
 rm -rf ~/.config/fastfetch && ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
 
 ## first run for theme
-iris -i ~/.flux-dotfiles/theme/default.png && flux-theme default
+cd ~/.flux-dotfiles/theme
+iris -i default.png && lua flux-theme.lua default
 
 ## reboot
+sleep 3
 sudo systemctl reboot
