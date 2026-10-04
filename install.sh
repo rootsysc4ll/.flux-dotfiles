@@ -1,7 +1,8 @@
 #!/bin/sh
 
-## installing apps
+cd $HOME
 
+## installing apps
 # general applications
 sudo pacman -Syu
 sudo pacman -S --needed base-devel git
@@ -18,10 +19,16 @@ rm -rf paru
 paru -S iris-colors
 
 ## setting up fish
-chsh -s /bin/fish && systemctl reboot
+chsh -s /bin/fish
 
 ## setting up symlinks
 rm -rf ~/.config/iris && ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
 rm -rf ~/.config/kitty && ln -s -T ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
 rm -rf ~/.config/fish && ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
 rm -rf ~/.config/fastfetch && ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
+
+## first run for theme
+iris -i ~/.flux-dotfiles/theme/default.png && flux-theme default
+
+## reboot
+sudo systemctl reboot
