@@ -23,10 +23,10 @@ paru -S --noconfirm iris-colors
 chsh -s /bin/fish
 
 ## setting up symlinks
-rm -rf ~/.config/iris || ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
-rm -rf ~/.config/kitty || ln -s -T ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
-rm -rf ~/.config/fish || ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
-rm -rf ~/.config/fastfetch || ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
+rm -r ~/.config/iris || ln -s -T ~/.flux-dotfiles/applications/iris/ ~/.config/iris
+rm -r ~/.config/kitty || ln -s -T ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
+rm -r ~/.config/fish || ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
+rm -r ~/.config/fastfetch || ln -s -T ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
 
 ## first run for theme
 cd ~/.flux-dotfiles/theme
