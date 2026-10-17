@@ -5,14 +5,17 @@
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 --  Hyprland
-local home = os.getenv("HOME")
-hl.env("HYPRLAND_CONFIG", home .. "/.flux-dotfiles/hypr/hyprland.lua")
+hl.env("HYPRLAND_CONFIG", os.getenv("HOME") .. "/.flux-dotfiles/hypr/hyprland.lua")
 
 -- Toolkit backend
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("SDL_VIDEODRIVER", "wayland")
 hl.env("CLUTTER_BACKEND", "wayland")
+
+-- Rendering backend
+hl.env("QSG_RHI_BACKEND", "vulkan")
+hl.env("GSK_RENDERER", "vulkan")
 
 -- XDG 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")

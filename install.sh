@@ -6,7 +6,7 @@ cd $HOME
 # general applications
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed base-devel git
-sudo pacman -S --noconfirm hyprland xdg-desktop-portal-hyprland hyprpolkitagent hyprshot hyprsunset uwsm rofi kitty fish quickshell awww brightnessctl fastfetch ttf-jetbrains-mono-nerd ttf-material-symbols-variable
+sudo pacman -S --noconfirm hyprland xdg-desktop-portal-hyprland hyprpolkitagent hyprshot hyprsunset uwsm rofi kitty dunst fish quickshell awww brightnessctl fastfetch ttf-jetbrains-mono-nerd ttf-material-symbols-variable
 
 # paru
 git clone https://aur.archlinux.org/paru.git
@@ -26,7 +26,7 @@ chsh -s /bin/fish
 ln -sT ~/.flux-dotfiles/applications/iris/ ~/.config/iris
 ln -sT ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
 ln -sT ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
-rm -r ~/.config/fish || ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
+rm -r ~/.config/fish && ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
 
 ## first run for theme
 cd ~/.flux-dotfiles/theme

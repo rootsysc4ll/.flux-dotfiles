@@ -18,7 +18,16 @@ hl.bind(mainMod .. " + M",
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
--- Move focus with mainMod + arrow keys
+-- Move focus with mainMod + arrow keys or switch the focus between tiled and floating windows
+hl.bind(mainMod .. " + space", function()
+  local window = hl.get_active_window()
+  if not window then return end
+
+  hl.dispatch(hl.dsp.window.cycle_next({
+      floating = not window.floating,
+      tiled = window.floating,
+  }))
+end)
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
@@ -39,6 +48,16 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- Special workspaces
+hl.bind("SUPER + SHIFT + S", function ()
+  hl.dispatch(hl.dsp.exec_cmd(Bar))
+  hl.dispatch(hl.dsp.window.move({ workspace = "special:terminal" }))
+end)
+hl.bind("SUPER + S", function ()
+  hl.dispatch(hl.dsp.exec_cmd(Bar))
+  hl.dispatch(hl.dsp.workspace.toggle_special("terminal"))
+end)
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
@@ -80,7 +99,8 @@ for i = 1, #Theme do
 end
 
 -- Screenshot
-hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o ~/Pictures/Screenshots"))
+hl.bind("Print + M", hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o ~/Pictures/Screenshots"))
+hl.bind("Print + R", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots"))
 
 -- hyprsunset management
 local temperature = 4500
