@@ -50,13 +50,11 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Special workspaces
-hl.bind("SUPER + SHIFT + S", function ()
+hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:terminal" }))
+hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("terminal"))
+-- to close the bar when the user opens the terminal ws(leaves more space to work with)
+hl.on("workspace.special_active", function ()
   hl.dispatch(hl.dsp.exec_cmd(Bar))
-  hl.dispatch(hl.dsp.window.move({ workspace = "special:terminal" }))
-end)
-hl.bind("SUPER + S", function ()
-  hl.dispatch(hl.dsp.exec_cmd(Bar))
-  hl.dispatch(hl.dsp.workspace.toggle_special("terminal"))
 end)
 
 -- Laptop multimedia keys for volume and LCD brightness
