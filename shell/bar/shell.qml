@@ -20,8 +20,14 @@ ShellRoot {
 				"bg": Colors.colors.bg,
 				"fg": Colors.colors.fg,
 				"accent": Colors.colors.accent,
-				"green": Colors.colors.green,
-				"dim": Colors.colors.dim
+				"dim": Colors.colors.dim,
+				"green": "green",
+				"lightgreen": "lightgreen",
+				"red": "red",
+				"lightred": "lightcoral",
+				"yellow": "yellow",
+				"white": "white",
+				"black": "black"
 			}
 
 			color: Qt.rgba(0, 0, 0, 0.01)
@@ -56,7 +62,7 @@ ShellRoot {
 				}
 
 				Rectangle {
-					color: bar.colors["fg"]
+					color: bar.colors["accent"]
 					width: 2
 					height: bar.barHeight - 10
 					Layout.leftMargin: 10

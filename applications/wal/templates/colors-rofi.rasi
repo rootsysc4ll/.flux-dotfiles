@@ -1,0 +1,6 @@
+* {
+  background-window: #00000033;
+  background-color: #{background.strip}4d;
+  background-selected: #{cursor.strip}4d;
+  text-color: #{foreground.strip}4d;
+}

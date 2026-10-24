@@ -49,7 +49,7 @@ RowLayout {
 
     Text {
         text: icon
-        color: percent < 50 ? bar.colors["dim"] : bar.colors["fg"]
+        color: percent <= 50 ? bar.colors["black"] : bar.colors["white"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -58,7 +58,7 @@ RowLayout {
 
     Text {
         text: percent + "%"
-        color: percent < 50 ? bar.colors["dim"] : bar.colors["fg"]
+        color: percent <= 50 ? bar.colors["black"] : bar.colors["white"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

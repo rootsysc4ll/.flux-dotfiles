@@ -2,11 +2,8 @@
 ---- LOOK AND FEEL ----
 -----------------------
 
---require("utils.Colors")
-local home = os.getenv("HOME")
-package.path = package.path .. ";" .. home .. "/.cache/iris/colors-hypr.lua;"
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/.cache/wal/colors-hypr.lua;"
 require("colors-hypr")
-
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({

@@ -11,7 +11,7 @@ Singleton {
     
     FileView {
         id: dataFile
-        path: StandardPaths.writableLocation(StandardPaths.GenericCacheLocation) + "/iris/Colors.json"
+        path: StandardPaths.writableLocation(StandardPaths.GenericCacheLocation) + "/wal/Colors.json"
         blockLoading: false
         printErrors: true
         watchChanges: true

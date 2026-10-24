@@ -20,7 +20,7 @@ Text {
         ScriptAction { script: {
             if (lockContext.showFailure) {
                 text = errorChar
-                color = "red"
+                color = lock.colors["red"]
             } else {
                 text = defaultChar
                 color = lock.colors["accent"]

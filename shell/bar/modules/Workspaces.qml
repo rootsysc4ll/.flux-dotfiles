@@ -5,7 +5,6 @@ import QtQuick.Layouts
 
 RowLayout {
     id: row
-    //anchors.centerIn: parent
     spacing: 10
 
     Repeater {

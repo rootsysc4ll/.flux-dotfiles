@@ -1,0 +1,4 @@
+you need to:
+migrate the qml json template
+change the green and red colors for some icons
+implement an alpha variable for the themes

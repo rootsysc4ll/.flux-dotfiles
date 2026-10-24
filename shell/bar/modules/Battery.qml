@@ -20,8 +20,8 @@ RowLayout {
     Text {
         text: icon
         color: charging ? bar.colors["green"]
-                        : (level <= 40) ? "yellow"
-                        : (level <= 15) ? "red"
+                        : (level <= 40) ? bar.colors["yellow"]
+                        : (level <= 15) ? bar.colors["red"]
                         : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
@@ -32,8 +32,8 @@ RowLayout {
     Text {
         text: level + "%"
         color: charging ? bar.colors["green"]
-                        : (level <= 40) ? "yellow"
-                        : (level <= 15) ? "red"
+                        : (level <= 40) ? bar.colors["yellow"]
+                        : (level <= 15) ? bar.colors["red"]
                         : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"

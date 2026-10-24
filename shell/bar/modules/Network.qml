@@ -11,7 +11,6 @@ RowLayout {
     property var activeNetwork: wifiDevice ? wifiDevice.networks.values.find(n => n.connected) : null
 
     readonly property real signal: activeNetwork ? activeNetwork.signalStrength : 0
-
     readonly property string icon: {
         if (!wifiEnabled) return String.fromCodePoint(0xf092e)
         if (!activeNetwork) return String.fromCodePoint(0xf092b)
@@ -24,9 +23,21 @@ RowLayout {
         return String.fromCodePoint(0xf091f + (tier - 1) * 3)
     }
 
+    function textColor() {
+        if (!wifiEnabled) {
+            return bar.colors["red"]
+        } else if (!activeNetwork) {
+            return bar.colors["lightred"]
+        } else if (signal < 0.50) {
+            return bar.colors["lightgreen"]
+        } else {
+            return bar.colors["green"]
+        }
+    }
+
     Text {
         text: icon 
-        color: (!wifiEnabled || !activeNetwork) ? "red" : bar.colors["green"]
+        color: textColor()
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -40,7 +51,7 @@ RowLayout {
 
             return activeNetwork.name
         }
-        color: (!wifiEnabled || !activeNetwork) ? "red" : bar.colors["green"]
+        color: textColor()
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

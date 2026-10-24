@@ -25,7 +25,7 @@ RowLayout {
  
     Text {
         text: icon
-        color: (!ready || muted || vol < 33) ? "yellow" : bar.colors["green"]
+        color: (!ready || muted || vol < 33) ? bar.colors["yellow"] : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 16
@@ -39,7 +39,7 @@ RowLayout {
 
             return vol + "%" 
         }
-        color: (!ready || muted || vol < 33) ? "yellow" : bar.colors["green"]
+        color: (!ready || muted || vol < 33) ? bar.colors["yellow"] : bar.colors["green"]
         font {
             family: "JetBrainsMono Nerd Font Regular"
             pixelSize: 14

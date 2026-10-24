@@ -88,11 +88,11 @@ hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Wallpaper/Theme management
 for i = 1, #Theme do
-  local mode = Theme[i].mode == "light" and 0 or 1
+  local mode = Theme[i].mode == "light" and " -l" or ""
 
   hl.bind(subMod .. " + W + " .. i,function ()
     hl.dispatch(hl.dsp.exec_cmd("awww img " .. Theme[i].wpPath .. " --transition-type any --transition-duration 2"))
-    hl.dispatch(hl.dsp.exec_cmd("iris " .. Theme[i].wpPath .. " --dark " .. mode .. " --glass"))
+    hl.dispatch(hl.dsp.exec_cmd("wal -n" .. mode .. " -i " .. Theme[i].wpPath .. " -a 0"))
   end)
 end
 

@@ -2,8 +2,8 @@ hl.config({
 	general = {
 		col = {
 			active_border = { colors = {
-				"rgba({accent.strip}ff)",
-				"rgba({surface.strip}ff)"
+				"rgba({color10.strip}ff)",
+				"rgba({color0.strip}ff)"
 			} }
 		}
 	}

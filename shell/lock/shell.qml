@@ -25,7 +25,7 @@ ShellRoot {
                 "fg": Colors.colors.fg,
                 "accent": Colors.colors.accent
             }
-            readonly property var wallpaperPath: Wallpaper.wallpaperPath
+            readonly property var wallpaperPath: Colors.colors.wallpaper
 
             WlSessionLockSurface {
                 WallpaperImage {}
