@@ -14,7 +14,6 @@ Rectangle {
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Space) {
             if (!sleepProc.running) {
                 sleepProc.startDetached()
-                Qt.quit()
             }
         }
     }
@@ -39,6 +38,6 @@ Rectangle {
 
     Process { 
         id: sleepProc 
-        command: ["fish", "-c", 'LOCK_AND_SLEEP=true flux-lock']
+        command: ["env", "LOCK_AND_SLEEP=true", "fish", "-c", "flux-powerOptions && flux-lock"]
     }
 }

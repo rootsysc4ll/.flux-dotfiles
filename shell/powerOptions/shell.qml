@@ -13,7 +13,7 @@ ShellRoot {
             id: powerOptions
 
             readonly property var colors: {
-                "bg": Colors.colors.bg
+                "bg": Colors.colors.accent
             }
             
             WlrLayershell.layer: WlrLayer.Top

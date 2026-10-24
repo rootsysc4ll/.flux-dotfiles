@@ -12,7 +12,7 @@ ShellRoot {
     Process { id: sleep; command: ["sh", "-c", "systemctl sleep"] }
     LockContext { id: lockContext }
 
-    Loader { sourceComponent: Colors.isLoaded && Wallpaper.isLoaded ? lockComponent : null }
+    Loader { sourceComponent: Colors.isLoaded && Colors.colors.wallpaper ? lockComponent : null }
     Component {
         id: lockComponent
 
