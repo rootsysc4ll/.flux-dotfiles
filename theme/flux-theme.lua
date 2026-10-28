@@ -108,7 +108,7 @@ local function createTheme(newTheme, themeConfig)
     local targetIndex = checkIfThemeExists(newTheme.name, themeConfig.themes)
 
     if targetIndex > 0 then
-        return "A theme with the same name already exists"
+        return "A theme with the same name already exists."
     else
         table.insert(themeConfig.themes, {
             name = newTheme.name,
@@ -117,7 +117,7 @@ local function createTheme(newTheme, themeConfig)
         })
 
         saveJSON(themeConfig)
-        return ("Created new theme")
+        return "Created new theme."
     end
 end
 
@@ -147,18 +147,18 @@ local function setUtilityArgument(utilityName, targetedArg, value, themeConfig)
     end
 end
 
-local function printThemes(themeConfigThemes)
+local function getThemes(themeConfigThemes)
     local encoded = json.encode(themeConfigThemes)
     local prettier = jsonPrettier(encoded)
 
-    print(prettier)
+    return prettier
 end
 
-local function printConfig(themeConfig)
+local function getConfig(themeConfig)
     local encoded = json.encode(themeConfig)
     local prettier = jsonPrettier(encoded)
 
-    print(prettier)
+    return prettier
 end
 
 local function cli(args)
@@ -168,44 +168,49 @@ local function cli(args)
         return error("themeConfig is empty. Closing the cli...")
     end
 
-    if     args[1] == "-d" or args[1] == "--default"         then
-        print(
-            createDefaultThemeJsonFile()
-        )
-    elseif args[1] == "-c" or args[1] == "--create"          then
-        print(
-            createTheme({
-                name = args[2],
-                wpPath = args[3],
-                mode = args[4]
+    for i, arg in ipairs(args) do
+        if     arg == "-d" or arg == "--default"         then
+            return createDefaultThemeJsonFile()
+        elseif arg == "-c" or arg == "--create"          then
+            return createTheme({
+                name   = args[i + 1],
+                wpPath = args[i + 2],
+                mode   = args[i + 3]
             }, themeConfig)
-        )
-    elseif args[1] == "-r" or args[1] == "--remove"          then
-        print(
-            removeTheme(args[2], themeConfig)
-        )
-    elseif args[1] == "-a" or args[1] == "--set-utility-arg" then
-        print(
-            setUtilityArgument(args[2], args[3], args[4], themeConfig)
-        )
-    elseif args[1] == "-p" or args[1] == "--print-themes"    then
-        printThemes(themeConfig.themes)
-    elseif args[1] == "--config"                             then
-        printConfig(themeConfig)
-    else
-        print("Unknown option.")
+        elseif arg == "-r" or arg == "--remove"          then
+            return removeTheme(args[i + 1], themeConfig)
+        elseif arg == "-a" or arg == "--set-utility-arg" then
+            return setUtilityArgument(
+                args[i + 1],
+                args[i + 2],
+                args[i + 3],
+                themeConfig
+            )
+        elseif arg == "-p" or arg == "--print-themes"    then
+            return getThemes(themeConfig.themes)
+        elseif arg == "--config"                         then
+            return getConfig(themeConfig)
+        else
+            return "Unknown argument."
+        end
     end
 end
 
-local args = {...}
-local themeJsonFile = io.open(THEME_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether Theme.json exists
+-- this is the entry for the program
+local function main(argv)
+    local themeJsonFile = io.open(THEME_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether Theme.json exists
 
-if themeJsonFile then
-    themeJsonFile:close()
-    cli(args)
-else
-    print("Json file does not exists, creating one...")
-    print(
-        createDefaultThemeJsonFile()
-    )
+    if themeJsonFile then
+        themeJsonFile:close()
+        print(
+            cli(argv)
+        )
+    else
+        print("Json file does not exists, creating one...")
+        print(
+            createDefaultThemeJsonFile()
+        )
+    end
 end
+
+main({...})
