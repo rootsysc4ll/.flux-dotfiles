@@ -17,20 +17,20 @@ cd ..
 rm -rf paru
 
 # iris
-paru -S --noconfirm iris-colors
+paru -S --noconfirm python-pywal16
 
 ## setting up fish
 chsh -s /bin/fish
 
 ## setting up symlinks
-ln -sT ~/.flux-dotfiles/applications/iris/ ~/.config/iris
+ln -sT ~/.flux-dotfiles/applications/wal/ ~/.config/wal
 ln -sT ~/.flux-dotfiles/applications/kitty/ ~/.config/kitty
 ln -sT ~/.flux-dotfiles/applications/fastfetch/ ~/.config/fastfetch
 rm -r ~/.config/fish && ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/fish
 
 ## first run for theme
 cd ~/.flux-dotfiles/theme
-iris -i default.png && lua flux-theme.lua default
+wal -i default.png && lua flux-theme.lua default
 
 ## reboot
 sleep 5

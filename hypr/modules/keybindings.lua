@@ -2,7 +2,8 @@
 ---- KEYBINDINGS ----
 ---------------------
 
-require(os.getenv("FLUX") .. "/theme/Theme")
+local themeConfig = require(os.getenv("FLUX") .. "/theme/Theme")
+local themes = themeConfig.themes
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local subMod  = "ALT"
@@ -87,12 +88,13 @@ hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Wallpaper/Theme management
-for i = 1, #Theme do
-  local mode = Theme[i].mode == "light" and " -l" or ""
+for i = 1, #themes do
+  local theme = themes[i]
+  local mode = theme.mode == "light" and " -l" or ""
 
   hl.bind(subMod .. " + W + " .. i,function ()
-    hl.dispatch(hl.dsp.exec_cmd("awww img " .. Theme[i].wpPath .. " --transition-type any --transition-duration 2"))
-    hl.dispatch(hl.dsp.exec_cmd("wal -n" .. mode .. " -i " .. Theme[i].wpPath .. " -a 0"))
+    hl.dispatch(hl.dsp.exec_cmd("awww img " .. theme.wpPath .. " --transition-type any --transition-duration 2"))
+    hl.dispatch(hl.dsp.exec_cmd("wal -n" .. mode .. " -i " .. theme.wpPath .. " -a 0"))
   end)
 end
 
