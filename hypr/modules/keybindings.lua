@@ -2,8 +2,13 @@
 ---- KEYBINDINGS ----
 ---------------------
 
-local themeConfig = require(os.getenv("FLUX") .. "/theme/Theme")
-local themes = themeConfig.themes
+-- local themesQuantity = require(os.getenv("FLUX") .. "/theme/flux-theme")
+local pipe = io.popen("jq -r '.numberOfThemes' " .. os.getenv("FLUX") .. "/theme/Theme.json")
+local themesQuantity = nil
+if pipe then
+  themesQuantity = tonumber(pipe:read("*a"))
+  pipe:close()
+end
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local subMod  = "ALT"
@@ -11,8 +16,8 @@ local subMod  = "ALT"
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(Terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(Menu .. " || " .. "pkill rofi")) -- open/close rofi menu
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Bar)) -- open quickshell bar
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(PowerOptions)) -- Open/Close power options
+hl.bind(mainMod .. " + B", hl.dsp.exec_raw(Bar)) -- open quickshell bar
+hl.bind(mainMod .. " + P", hl.dsp.exec_raw(PowerOptions)) -- Open/Close power options
 hl.bind(mainMod .. " + Escape", hl.dsp.window.close())
 hl.bind(mainMod .. " + M",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
@@ -88,14 +93,8 @@ hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Wallpaper/Theme management
-for i = 1, #themes do
-  local theme = themes[i]
-  local mode = theme.mode == "light" and " -l" or ""
-
-  hl.bind(subMod .. " + W + " .. i,function ()
-    hl.dispatch(hl.dsp.exec_cmd("awww img " .. theme.wpPath .. " --transition-type any --transition-duration 2"))
-    hl.dispatch(hl.dsp.exec_cmd("wal -n" .. mode .. " -i " .. theme.wpPath .. " -a 0"))
-  end)
+for i = 1, themesQuantity do
+  hl.bind(subMod .. " + W + " .. i, hl.dsp.exec_cmd('fish --init-command="flux-theme load ' .. i .. '"'))
 end
 
 -- Screenshot

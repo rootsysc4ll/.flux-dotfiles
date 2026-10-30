@@ -71,7 +71,15 @@ local function jsonPrettier(jsonStr, indentChar, indentSize)
     return table.concat(result)
 end
 
-local function saveJSON(data)
+local function decodeJson()
+    local f = assert(io.open(THEME_JSON_FILE_PATH, "r+"))
+    local themeConfig = json.decode(f:read("*a"))
+    f:close()
+
+    return themeConfig
+end
+
+local function saveJson(data)
     local encoded = json.encode(data)
     local prettier = jsonPrettier(encoded)
 
@@ -84,7 +92,7 @@ local function saveJSON(data)
 end
 
 local function createDefaultThemeJsonFile()
-    local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"wpPath": "~/.flux-dotfiles/theme/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
+    local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"numberOfThemes": 1,\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"image": "~/.flux-dotfiles/theme/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
 
     local f = assert(io.open(THEME_JSON_FILE_PATH, "w+")) -- assertion because the file creation is forced
     f:write(rawJSON)
@@ -112,11 +120,12 @@ local function createTheme(newTheme, themeConfig)
     else
         table.insert(themeConfig.themes, {
             name = newTheme.name,
-            wpPath = newTheme.wpPath,
+            image = newTheme.image,
             mode = newTheme.mode
         })
+        themeConfig.numberOfThemes = #themeConfig.themes
 
-        saveJSON(themeConfig)
+        saveJson(themeConfig)
         return "Created new theme."
     end
 end
@@ -126,7 +135,7 @@ local function removeTheme(name, themeConfig)
 
     if targetIndex > 0 then
         table.remove(themeConfig.themes, targetIndex)
-        saveJSON(themeConfig)
+        saveJson(themeConfig)
 
         return "Theme removed."
     else
@@ -142,7 +151,7 @@ local function setUtilityArgument(utilityName, targetedArg, value, themeConfig)
     else
         themeConfig[utilityName][targetedArg] = value
 
-        saveJSON(themeConfig)
+        saveJson(themeConfig)
         return [[Changed argument "]] .. targetedArg .. [[" of utility "]] .. utilityName .. [[" to "]] .. value .. [[".]]
     end
 end
@@ -161,8 +170,34 @@ local function getConfig(themeConfig)
     return prettier
 end
 
+local function loadTheme(themeIndex, themeConfig, numeberOfThemes)
+    if not themeIndex or themeIndex > numeberOfThemes or themeIndex < 0 then
+        return "That's an invalid index or this theme doesn't exists."
+    end
+
+    local theme = themeConfig.themes[themeIndex]
+    local image = theme.image
+    local mode  = theme.mode == "light" and " -l" or ""
+
+    local result = os.execute(
+        "awww img "                  .. image
+        .. " --transition-type "     .. themeConfig.awww["--transition-type"]
+        .. " --transition-duration " .. themeConfig.awww["--transition-duration"]
+        .. " && "
+        .. "wal -n " .. mode
+        .. " -i "    .. image
+        .. " -a "    .. themeConfig.wal["-a"]
+    )
+
+    if result then
+        return "(flux-theme): The config was succesfully loaded."
+    else
+        return "(flux-theme): Some error occured and the config wasn't loaded."
+    end
+end
+
 local function cli(args)
-    local themeConfig = require("Theme")
+    local themeConfig = decodeJson()
 
     if themeConfig == {} then
         return error("themeConfig is empty. Closing the cli...")
@@ -173,9 +208,9 @@ local function cli(args)
             return createDefaultThemeJsonFile()
         elseif arg == "-c" or arg == "--create"          then
             return createTheme({
-                name   = args[i + 1],
-                wpPath = args[i + 2],
-                mode   = args[i + 3]
+                name  = args[i + 1],
+                image = args[i + 2],
+                mode  = args[i + 3]
             }, themeConfig)
         elseif arg == "-r" or arg == "--remove"          then
             return removeTheme(args[i + 1], themeConfig)
@@ -190,6 +225,8 @@ local function cli(args)
             return getThemes(themeConfig.themes)
         elseif arg == "--config"                         then
             return getConfig(themeConfig)
+        elseif arg == "load"                             then
+            return loadTheme(tonumber(args[i + 1]), themeConfig, themeConfig.numberOfThemes)
         else
             return "Unknown argument."
         end
