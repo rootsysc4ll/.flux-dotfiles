@@ -1,36 +1,16 @@
 # flux-dotfiles
 
-I don't know how to make install-scripts yet, but here is a guide to properly install the dotfiles:
-
-## Details
-This repo depends on the following packages:
-<ul>
-    <li>Hyprland</li>
-    <li>hyprshot</li>
-    <li>hyprsunset</li>
-    <li>uwsm</li>
-    <li>rofi</li>
-    <li>fish</li>
-    <li>quickshell</li>
-    <li>awww</li>
-    <li>brightnessctl</li>
-    <li>fastfetch</li>
-    <li>iris (AUR, use yay or paru): <code>paru -S iris</code></li>
-    <li>ttf-jetbrains-mono-nerd and ttf-material-symbols-variable</li>
-</ul>
-So make sure to install them.<br>
-
 ## Installation
 Run the installation file(not as root) in the home directory and you should be good
 
 ## How to create themes
-To create themes, there is a fish function named `flux-theme` that have nearly all the functionalities you will need:<br>
- - `flux-theme file`: outputs the theme file to the terminal
- - `flux-theme default`: creates the default theme file, run this in your first use
- - `flux-theme create [themeName themePath themeMode]`: creates a theme with given args. Notice that themeMode can be dark/light, and,for the path, you can use either absolute or relative paths(make use of the $WP_PATH envvar if you want)
- - `flux-theme remove themeName`: removes a theme with given name
+To create themes, there is a fish fucntion that acts like a cli named `flux-theme`, it haves nearly all the functionalities you will need.<br>
+To see all the arguments and options for it, type `flux-theme --help` on the terminal.<br>
 
 ## Recomendations
  - Read `keybindings.lua` to understand all the keybindings, specially the theme switching ones
- - Go visit [Iris repo](https://github.com/Harman1307/iris) and [awww guide](https://linuxcommandlibrary.com/man/awww) to understand the color scheme implementation
- - Also visit [Hyprland wiki](https://wiki.hypr.land/) and [Quickshell wiki](https://quickshell.org/) to understand the dotfile as a whole
+## Thanks to the teams from
+ - (hyprland)[https://github.com/hyprwm/hyprland]
+ - (awww)[https://codeberg.org/LGFae/awww]
+ - (quickshell)[https://quickshell.org/]
+ - (pywal16)[https://github.com/eylles/pywal16]

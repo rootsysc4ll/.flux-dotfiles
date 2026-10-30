@@ -30,7 +30,7 @@ rm -r ~/.config/fish && ln -s -T ~/.flux-dotfiles/applications/fish/ ~/.config/f
 
 ## first run for theme
 cd ~/.flux-dotfiles/theme
-wal -i default.png && lua flux-theme.lua default
+wal -i default.png && lua flux-theme.lua -d
 
 ## reboot
 sleep 5

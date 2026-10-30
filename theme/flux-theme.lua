@@ -1,5 +1,5 @@
 local json = require("json")
-local THEME_JSON_FILE_PATH = os.getenv("FLUX") .. "/theme/Theme.json"
+local THEME_JSON_FILE_PATH = os.getenv("FLUX") .. "/theme/ThemeConfig.json"
 
 local function jsonPrettier(jsonStr, indentChar, indentSize)
     indentChar = indentChar or " "
@@ -235,7 +235,7 @@ end
 
 -- this is the entry for the program
 local function main(argv)
-    local themeJsonFile = io.open(THEME_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether Theme.json exists
+    local themeJsonFile = io.open(THEME_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether ThemeConfig.json exists
 
     if themeJsonFile then
         themeJsonFile:close()

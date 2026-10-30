@@ -3,7 +3,7 @@
 ---------------------
 
 -- local themesQuantity = require(os.getenv("FLUX") .. "/theme/flux-theme")
-local pipe = io.popen("jq -r '.numberOfThemes' " .. os.getenv("FLUX") .. "/theme/Theme.json")
+local pipe = io.popen("jq -r '.numberOfThemes' " .. os.getenv("FLUX") .. "/theme/ThemeConfig.json")
 local themesQuantity = nil
 if pipe then
   themesQuantity = tonumber(pipe:read("*a"))
