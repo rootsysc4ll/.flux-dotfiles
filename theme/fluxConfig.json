@@ -1,0 +1,32 @@
+{
+    "numberOfThemes": 4,
+    "wal": {
+        "-a": 0
+    },
+    "themes": [
+        {
+            "name": "default",
+            "mode": "dark",
+            "image": "~/.flux-dotfiles/theme/default.png"
+        },
+        {
+            "name": "chidarume",
+            "mode": "light",
+            "image": "/home/anynam/Pictures/Wallpapers/chidaruma.png"
+        },
+        {
+            "name": "motoko",
+            "mode": "dark",
+            "image": "/home/anynam/Pictures/Wallpapers/motoko.png"
+        },
+        {
+            "name": "lapis",
+            "mode": "dark",
+            "image": "/home/anynam/Pictures/Wallpapers/lapis.png"
+        }
+    ],
+    "awww": {
+        "--transition-type": "any",
+        "--transition-duration": 2
+    }
+}

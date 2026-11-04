@@ -41,6 +41,7 @@ ShellRoot {
 			aboveWindows: true
 
 			RowLayout {
+				id: barContent
 				anchors.fill: parent
 				anchors.leftMargin: 12
 				anchors.rightMargin: 12
@@ -70,6 +71,11 @@ ShellRoot {
 				}
 
 				Clock {}
+			}
+
+			StylizedCharacter {
+				anchors.centerIn: barContent
+				anchors.horizontalCenterOffset: -420
 			}
 		}
 	}

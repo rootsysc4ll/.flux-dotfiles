@@ -2,8 +2,7 @@
 ---- KEYBINDINGS ----
 ---------------------
 
--- local themesQuantity = require(os.getenv("FLUX") .. "/theme/flux-theme")
-local pipe = io.popen("jq -r '.numberOfThemes' " .. os.getenv("FLUX") .. "/theme/ThemeConfig.json")
+local pipe = io.popen("jq -r '.numberOfThemes' " .. os.getenv("FLUX") .. "/theme/fluxConfig.json")
 local themesQuantity = nil
 if pipe then
   themesQuantity = tonumber(pipe:read("*a"))
@@ -43,7 +42,7 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
   local key = i % 10 -- 10 maps to key 0
-  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }), { release = true })
+  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
   hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
@@ -56,11 +55,16 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Special workspaces
-hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:terminal" }))
+local terminal_ws_name = "special:terminal"
+hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = terminal_ws_name }))
 hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("terminal"))
--- to close the bar when the user opens the terminal ws(leaves more space to work with)
-hl.on("workspace.special_active", function ()
+hl.on("workspace.special_active", function () --> to close the bar when the user opens the terminal ws(leaves more space to work with)
   hl.dispatch(hl.dsp.exec_cmd(Bar))
+end)
+hl.on("workspace.created", function (ws)
+  if ws.is_empty and ws.name == terminal_ws_name then
+    hl.dispatch(hl.dsp.exec_cmd(Terminal))
+  end
 end)
 
 -- Laptop multimedia keys for volume and LCD brightness

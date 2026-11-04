@@ -26,7 +26,7 @@ RowLayout {
                 font {
                     family: "JetBrainsMono Nerd Font Regular"
                     pixelSize: 14
-                    weight: isActive ? 700 : 400
+                    weight: isActive || ws ? 700 : 400
                 }
             }
 

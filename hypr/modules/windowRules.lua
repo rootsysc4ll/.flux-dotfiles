@@ -57,6 +57,5 @@ hl.window_rule({
 
 -- Workspace rules
 hl.workspace_rule({
-    workspace = "special:terminal",
-    on_created_empty = Terminal
+    workspace = "special:terminal"
 })

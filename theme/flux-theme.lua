@@ -1,5 +1,5 @@
 local json = require("json")
-local THEME_JSON_FILE_PATH = os.getenv("FLUX") .. "/theme/ThemeConfig.json"
+local CONFIG_JSON_FILE_PATH = os.getenv("FLUX") .. "/theme/fluxConfig.json"
 
 local function jsonPrettier(jsonStr, indentChar, indentSize)
     indentChar = indentChar or " "
@@ -72,11 +72,11 @@ local function jsonPrettier(jsonStr, indentChar, indentSize)
 end
 
 local function decodeJson()
-    local f = assert(io.open(THEME_JSON_FILE_PATH, "r+"))
-    local themeConfig = json.decode(f:read("*a"))
+    local f = assert(io.open(CONFIG_JSON_FILE_PATH, "r+"))
+    local fluxConfig = json.decode(f:read("*a"))
     f:close()
 
-    return themeConfig
+    return fluxConfig
 end
 
 local function saveJson(data)
@@ -84,7 +84,7 @@ local function saveJson(data)
     local prettier = jsonPrettier(encoded)
 
     -- the assertion is made because, in order to this function be called. themeJsonFile certainly exists
-    local f = assert(io.open(THEME_JSON_FILE_PATH, "w"))
+    local f = assert(io.open(CONFIG_JSON_FILE_PATH, "w"))
     f:write(prettier)
     f:close()
 
@@ -94,7 +94,7 @@ end
 local function createDefaultThemeJsonFile()
     local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"numberOfThemes": 1,\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"image": "~/.flux-dotfiles/theme/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
 
-    local f = assert(io.open(THEME_JSON_FILE_PATH, "w+")) -- assertion because the file creation is forced
+    local f = assert(io.open(CONFIG_JSON_FILE_PATH, "w+")) -- assertion because the file creation is forced
     f:write(rawJSON)
     f:close()
 
@@ -102,8 +102,8 @@ local function createDefaultThemeJsonFile()
 end
 
 -- iteretates the themes in the config searching for an index matching the name, so tecnically checks if the theme exists
-local function checkIfThemeExists(name, themeConfigThemes)
-    for i, theme in ipairs(themeConfigThemes) do
+local function checkIfThemeExists(name, fluxConfigThemes)
+    for i, theme in ipairs(fluxConfigThemes) do
         if theme.name == name then
             return i -- returns the index matching the name 
         end
@@ -112,30 +112,34 @@ local function checkIfThemeExists(name, themeConfigThemes)
     return -1
 end
 
-local function createTheme(newTheme, themeConfig)
-    local targetIndex = checkIfThemeExists(newTheme.name, themeConfig.themes)
+local function createTheme(newTheme, fluxConfig)
+    if not newTheme.name or newTheme.image or newTheme.mode then
+        return "Please provide a name, an image path and a mode for the theme."
+    end
+
+    local targetIndex = checkIfThemeExists(newTheme.name, fluxConfig.themes)
 
     if targetIndex > 0 then
         return "A theme with the same name already exists."
     else
-        table.insert(themeConfig.themes, {
+        table.insert(fluxConfig.themes, {
             name = newTheme.name,
             image = newTheme.image,
             mode = newTheme.mode
         })
-        themeConfig.numberOfThemes = #themeConfig.themes
+        fluxConfig.numberOfThemes = #fluxConfig.themes
 
-        saveJson(themeConfig)
+        saveJson(fluxConfig)
         return "Created new theme."
     end
 end
 
-local function removeTheme(name, themeConfig)
-    local targetIndex = checkIfThemeExists(name, themeConfig.themes)
+local function removeTheme(name, fluxConfig)
+    local targetIndex = checkIfThemeExists(name, fluxConfig.themes)
 
     if targetIndex > 0 then
-        table.remove(themeConfig.themes, targetIndex)
-        saveJson(themeConfig)
+        table.remove(fluxConfig.themes, targetIndex)
+        saveJson(fluxConfig)
 
         return "Theme removed."
     else
@@ -143,51 +147,52 @@ local function removeTheme(name, themeConfig)
     end
 end
 
-local function setUtilityArgument(utilityName, targetedArg, value, themeConfig)
-    if not themeConfig[utilityName] then
+local function setUtilityArgument(utilityName, targetedArg, value, fluxConfig)
+    if not fluxConfig[utilityName] then
         return [[The config doesn't support the utility "]] .. utilityName .. [[".]]
-    elseif not themeConfig[utilityName][targetedArg] then
+    elseif not fluxConfig[utilityName][targetedArg] then
         return [[The config doesn't support the argument "]] .. targetedArg .. [[" for the utility "]] .. utilityName .. [[".]]
     else
-        themeConfig[utilityName][targetedArg] = value
+        fluxConfig[utilityName][targetedArg] = value
 
-        saveJson(themeConfig)
+        saveJson(fluxConfig)
         return [[Changed argument "]] .. targetedArg .. [[" of utility "]] .. utilityName .. [[" to "]] .. value .. [[".]]
     end
 end
 
-local function getThemes(themeConfigThemes)
-    local encoded = json.encode(themeConfigThemes)
+local function getThemes(fluxConfigThemes)
+    local encoded = json.encode(fluxConfigThemes)
     local prettier = jsonPrettier(encoded)
 
     return prettier
 end
 
-local function getConfig(themeConfig)
-    local encoded = json.encode(themeConfig)
+local function getConfig(fluxConfig)
+    local encoded = json.encode(fluxConfig)
     local prettier = jsonPrettier(encoded)
 
     return prettier
 end
 
-local function loadTheme(themeIndex, themeConfig, numeberOfThemes)
+local function loadTheme(themeIndex, fluxConfig, numeberOfThemes)
     if not themeIndex or themeIndex > numeberOfThemes or themeIndex < 0 then
         return "That's an invalid index or this theme doesn't exists."
     end
 
-    local theme = themeConfig.themes[themeIndex]
+    local theme = fluxConfig.themes[themeIndex]
     local image = theme.image
     local mode  = theme.mode == "light" and " -l" or ""
-
-    local result = os.execute(
+    local command =(
         "awww img "                  .. image
-        .. " --transition-type "     .. themeConfig.awww["--transition-type"]
-        .. " --transition-duration " .. themeConfig.awww["--transition-duration"]
+        .. " --transition-type "     .. fluxConfig.awww["--transition-type"]
+        .. " --transition-duration " .. fluxConfig.awww["--transition-duration"]
         .. " && "
         .. "wal -n " .. mode
         .. " -i "    .. image
-        .. " -a "    .. themeConfig.wal["-a"]
+        .. " -a "    .. fluxConfig.wal["-a"]
     )
+
+    local result = os.execute(command)
 
     if result then
         return "(flux-theme): The config was succesfully loaded."
@@ -197,10 +202,10 @@ local function loadTheme(themeIndex, themeConfig, numeberOfThemes)
 end
 
 local function cli(args)
-    local themeConfig = decodeJson()
+    local fluxConfig = decodeJson()
 
-    if themeConfig == {} then
-        return error("themeConfig is empty. Closing the cli...")
+    if fluxConfig == {} then
+        return error("fluxConfig is empty. Closing the cli...")
     end
 
     for i, arg in ipairs(args) do
@@ -211,22 +216,22 @@ local function cli(args)
                 name  = args[i + 1],
                 image = args[i + 2],
                 mode  = args[i + 3]
-            }, themeConfig)
+            }, fluxConfig)
         elseif arg == "-r" or arg == "--remove"          then
-            return removeTheme(args[i + 1], themeConfig)
+            return removeTheme(args[i + 1], fluxConfig)
         elseif arg == "-a" or arg == "--set-utility-arg" then
             return setUtilityArgument(
                 args[i + 1],
                 args[i + 2],
                 args[i + 3],
-                themeConfig
+                fluxConfig
             )
         elseif arg == "-p" or arg == "--print-themes"    then
-            return getThemes(themeConfig.themes)
+            return getThemes(fluxConfig.themes)
         elseif arg == "--config"                         then
-            return getConfig(themeConfig)
+            return getConfig(fluxConfig)
         elseif arg == "load"                             then
-            return loadTheme(tonumber(args[i + 1]), themeConfig, themeConfig.numberOfThemes)
+            return loadTheme(tonumber(args[i + 1]), fluxConfig, fluxConfig.numberOfThemes)
         else
             return "Unknown argument."
         end
@@ -235,7 +240,7 @@ end
 
 -- this is the entry for the program
 local function main(argv)
-    local themeJsonFile = io.open(THEME_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether ThemeConfig.json exists
+    local themeJsonFile = io.open(CONFIG_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether fluxConfig.json exists
 
     if themeJsonFile then
         themeJsonFile:close()
