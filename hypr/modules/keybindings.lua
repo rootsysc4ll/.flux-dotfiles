@@ -2,12 +2,7 @@
 ---- KEYBINDINGS ----
 ---------------------
 
-local pipe = io.popen("jq -r '.numberOfThemes' " .. os.getenv("FLUX") .. "/theme/fluxConfig.json")
-local themesQuantity = nil
-if pipe then
-  themesQuantity = tonumber(pipe:read("*a"))
-  pipe:close()
-end
+local fluxConfig = require(os.getenv("FLUX") .. "/utilities/fluxConfig")
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local subMod  = "ALT"
@@ -96,9 +91,9 @@ hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.swap({ direction = "right" }
 hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }))
 
--- Wallpaper/Theme management
-for i = 1, themesQuantity do
-  hl.bind(subMod .. " + W + " .. i, hl.dsp.exec_cmd('fish --init-command="flux-theme load ' .. i .. '"'))
+-- Theme management
+for i = 1, #fluxConfig.themes do
+  hl.bind(subMod .. " + W + " .. i, hl.dsp.exec_cmd('fish --init-command="flux load ' .. i .. '"'))
 end
 
 -- Screenshot

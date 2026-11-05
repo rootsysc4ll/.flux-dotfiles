@@ -1,0 +1,27 @@
+{
+    "wal": {
+        "-a": 0
+    },
+    "awww": {
+        "--transition-type": "any",
+        "--transition-duration": 2
+    },
+    "themes": [
+        {
+            "mode": "dark",
+            "name": "default",
+            "image": "/home/anynam/.flux-dotfiles/utilities/default.png"
+        },
+        {
+            "mode": "dark",
+            "name": "lapis",
+            "image": "/home/anynam/Pictures/Wallpapers/lapis.png"
+        },
+        {
+            "mode": "dark",
+            "name": "motoko",
+            "image": "/home/anynam/Pictures/Wallpapers/motoko.png"
+        }
+    ],
+    "numberOfThemes": 3
+}

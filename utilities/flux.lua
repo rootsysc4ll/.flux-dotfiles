@@ -1,5 +1,9 @@
+local CONFIG_DIR = os.getenv("FLUX") .. "/utilities"
+package.path = CONFIG_DIR .. "/?.lua;" .. package.path
+
 local json = require("json")
-local CONFIG_JSON_FILE_PATH = os.getenv("FLUX") .. "/theme/fluxConfig.json"
+local JSON_CONFIG_FILEPATH = CONFIG_DIR .. "/fluxConfig.json"
+local CONFIG_MODULE_FILE = "fluxConfig"
 
 local function jsonPrettier(jsonStr, indentChar, indentSize)
     indentChar = indentChar or " "
@@ -71,34 +75,26 @@ local function jsonPrettier(jsonStr, indentChar, indentSize)
     return table.concat(result)
 end
 
-local function decodeJson()
-    local f = assert(io.open(CONFIG_JSON_FILE_PATH, "r+"))
-    local fluxConfig = json.decode(f:read("*a"))
-    f:close()
-
-    return fluxConfig
-end
-
 local function saveJson(data)
     local encoded = json.encode(data)
     local prettier = jsonPrettier(encoded)
 
-    -- the assertion is made because, in order to this function be called. themeJsonFile certainly exists
-    local f = assert(io.open(CONFIG_JSON_FILE_PATH, "w"))
+    -- the assertion is made because, in order to this function be called. fluxJsonFile certainly exists
+    local f = assert(io.open(JSON_CONFIG_FILEPATH, "w"))
     f:write(prettier)
     f:close()
 
     return encoded
 end
 
-local function createDefaultThemeJsonFile()
-    local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"numberOfThemes": 1,\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"image": "~/.flux-dotfiles/theme/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
+local function createDefaultFluxJsonFile()
+    local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"image": ' .. '"' .. CONFIG_DIR .. '/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
 
-    local f = assert(io.open(CONFIG_JSON_FILE_PATH, "w+")) -- assertion because the file creation is forced
+    local f = assert(io.open(JSON_CONFIG_FILEPATH, "w+")) -- assertion because the file creation is forced
     f:write(rawJSON)
     f:close()
 
-    return "Created default json theme file"
+    return "Created default config file, run the cli again if this wasn't expected."
 end
 
 -- iteretates the themes in the config searching for an index matching the name, so tecnically checks if the theme exists
@@ -113,7 +109,7 @@ local function checkIfThemeExists(name, fluxConfigThemes)
 end
 
 local function createTheme(newTheme, fluxConfig)
-    if not newTheme.name or newTheme.image or newTheme.mode then
+    if not newTheme.name or not newTheme.image or not newTheme.mode then
         return "Please provide a name, an image path and a mode for the theme."
     end
 
@@ -130,6 +126,8 @@ local function createTheme(newTheme, fluxConfig)
         fluxConfig.numberOfThemes = #fluxConfig.themes
 
         saveJson(fluxConfig)
+        os.execute("hyprctl reload")
+
         return "Created new theme."
     end
 end
@@ -167,7 +165,7 @@ local function getThemes(fluxConfigThemes)
     return prettier
 end
 
-local function getConfig(fluxConfig)
+local function getConfigJson(fluxConfig)
     local encoded = json.encode(fluxConfig)
     local prettier = jsonPrettier(encoded)
 
@@ -195,23 +193,22 @@ local function loadTheme(themeIndex, fluxConfig, numeberOfThemes)
     local result = os.execute(command)
 
     if result then
-        return "(flux-theme): The config was succesfully loaded."
+        return "(flux): The config was succesfully loaded."
     else
-        return "(flux-theme): Some error occured and the config wasn't loaded."
+        return "(flux): Some error occured and the config wasn't loaded."
     end
 end
 
 local function cli(args)
-    local fluxConfig = decodeJson()
-
-    if fluxConfig == {} then
-        return error("fluxConfig is empty. Closing the cli...")
+    -- this is a special argument that don't need the module
+    if args[1] == "-d" or args[1] == "--default" then
+        return createDefaultFluxJsonFile()
     end
 
+    local fluxConfig = require(CONFIG_MODULE_FILE)
+
     for i, arg in ipairs(args) do
-        if     arg == "-d" or arg == "--default"         then
-            return createDefaultThemeJsonFile()
-        elseif arg == "-c" or arg == "--create"          then
+        if arg == "-c" or arg == "--create"          then
             return createTheme({
                 name  = args[i + 1],
                 image = args[i + 2],
@@ -229,7 +226,7 @@ local function cli(args)
         elseif arg == "-p" or arg == "--print-themes"    then
             return getThemes(fluxConfig.themes)
         elseif arg == "--config"                         then
-            return getConfig(fluxConfig)
+            return getConfigJson(fluxConfig)
         elseif arg == "load"                             then
             return loadTheme(tonumber(args[i + 1]), fluxConfig, fluxConfig.numberOfThemes)
         else
@@ -240,17 +237,17 @@ end
 
 -- this is the entry for the program
 local function main(argv)
-    local themeJsonFile = io.open(CONFIG_JSON_FILE_PATH, "r+") -- the only purpose of this is to test wether fluxConfig.json exists
+    local fluxJsonFile = io.open(JSON_CONFIG_FILEPATH, "r+") -- the only purpose of this is to test wether fluxConfig.json exists
 
-    if themeJsonFile then
-        themeJsonFile:close()
+    if fluxJsonFile then
+        fluxJsonFile:close()
         print(
             cli(argv)
         )
     else
         print("Json file does not exists, creating one...")
         print(
-            createDefaultThemeJsonFile()
+            createDefaultFluxJsonFile()
         )
     end
 end
