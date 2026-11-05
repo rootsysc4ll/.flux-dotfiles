@@ -228,7 +228,7 @@ local function cli(args)
         elseif arg == "--config"                         then
             return getConfigJson(fluxConfig)
         elseif arg == "load"                             then
-            return loadTheme(tonumber(args[i + 1]), fluxConfig, fluxConfig.numberOfThemes)
+            return loadTheme(tonumber(args[i + 1]), fluxConfig, #fluxConfig.themes)
         else
             return "Unknown argument."
         end
