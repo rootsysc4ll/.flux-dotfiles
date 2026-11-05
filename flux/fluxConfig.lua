@@ -1,4 +1,4 @@
-local CONFIG_DIR = os.getenv("FLUX") .. "/utilities"
+local CONFIG_DIR = os.getenv("FLUX") .. "/flux"
 package.path = CONFIG_DIR .. "/?.lua;" .. package.path
 
 local JSON_CONFIG_FILEPATH = CONFIG_DIR .. "/fluxConfig.json"

@@ -1,4 +1,4 @@
-local CONFIG_DIR = os.getenv("FLUX") .. "/utilities"
+local CONFIG_DIR = os.getenv("FLUX") .. "/flux"
 package.path = CONFIG_DIR .. "/?.lua;" .. package.path
 
 local json = require("json")
@@ -123,7 +123,6 @@ local function createTheme(newTheme, fluxConfig)
             image = newTheme.image,
             mode = newTheme.mode
         })
-        fluxConfig.numberOfThemes = #fluxConfig.themes
 
         saveJson(fluxConfig)
         os.execute("hyprctl reload")
@@ -134,6 +133,10 @@ end
 
 local function removeTheme(name, fluxConfig)
     local targetIndex = checkIfThemeExists(name, fluxConfig.themes)
+
+    if name == "default" then
+        return "You can't remove the default theme."
+    end
 
     if targetIndex > 0 then
         table.remove(fluxConfig.themes, targetIndex)
@@ -199,6 +202,22 @@ local function loadTheme(themeIndex, fluxConfig, numeberOfThemes)
     end
 end
 
+local function printHelp()
+    print("flux [option], flux [argument]")
+    print("Arguments:")
+    print("\t-d, --default                | Creates a default config, overwritting the existing one, if it exists.")
+    print("\t-c, --create name image mode | Creates a new theme object with a given name(unique), image, and mode(light or dark), in that specific order.")
+    print("\t-r, --remove name            | Removes a theme object from the theme array given its name.")
+    print("\t-a, --set-utility-arg        | Sets the argument that used in some utility related to the dotfile(e.g. awww or wal).")
+    print("\t-p, --print-themes           | Prints all the theme array.")
+    print("\t--config                     | Prints all the config file.")
+    print("\t--help                       | Prints this help message.")
+    print("Options:")
+    print("\tload index | Loads a theme to the session given an index that exists in the theme array.\n")
+    print("Note that you can only use the otion or the argument, not both.")
+    return ""
+end
+
 local function cli(args)
     -- this is a special argument that don't need the module
     if args[1] == "-d" or args[1] == "--default" then
@@ -227,6 +246,8 @@ local function cli(args)
             return getThemes(fluxConfig.themes)
         elseif arg == "--config"                         then
             return getConfigJson(fluxConfig)
+        elseif arg == "--help"                           then
+            return printHelp()
         elseif arg == "load"                             then
             return loadTheme(tonumber(args[i + 1]), fluxConfig, #fluxConfig.themes)
         else

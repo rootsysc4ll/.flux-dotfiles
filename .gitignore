@@ -1,4 +1,4 @@
 nix/hardware-configuration.nix
 .vscode
 hypr/.vscode
-utilities/fluxConfig.json
+flux/fluxConfig.json

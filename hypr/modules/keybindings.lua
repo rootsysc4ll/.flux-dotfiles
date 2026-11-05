@@ -2,7 +2,7 @@
 ---- KEYBINDINGS ----
 ---------------------
 
-local fluxConfig = require(os.getenv("FLUX") .. "/utilities/fluxConfig")
+local fluxConfig = require(os.getenv("FLUX") .. "/flux/fluxConfig")
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local subMod  = "ALT"
