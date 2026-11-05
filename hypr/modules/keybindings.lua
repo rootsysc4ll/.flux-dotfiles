@@ -101,12 +101,13 @@ hl.bind("Print + M", hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o ~/Pictures/
 hl.bind("Print + R", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots"))
 
 -- hyprsunset management
-local temperature = 4500
-local changeRate = 100
+local temperature = fluxConfig.hyprsunset.defaultTemperature
+local changeRate = fluxConfig.hyprsunset.changeRate
 
 local function changeTemperature(direction)
-  if (temperature + (direction * changeRate) < 6000) then
-    temperature = temperature + (direction * changeRate)
+  local finalTemperature = temperature + (direction * changeRate)
+  if (finalTemperature) < 6000 then
+    temperature = finalTemperature
   end
   hl.dispatch(hl.dsp.exec_cmd("hyprctl hyprsunset temperature " .. temperature))
 end

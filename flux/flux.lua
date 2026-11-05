@@ -88,7 +88,7 @@ local function saveJson(data)
 end
 
 local function createDefaultFluxJsonFile()
-    local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"image": ' .. '"' .. CONFIG_DIR .. '/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
+    local rawJSON = '{\n\t"awww": {\n\t\t"--transition-type": "any",\n\t\t"--transition-duration": 2\n\t},\n\t"hyprsunset": {\n\t\t"defaultTemperature": 5000,\n\t\t"changeRate": 100\n\t},\n\t"wal": {\n\t\t"-a": 0\n\t},\n\t"themes": [\n\t\t{\n\t\t\t"name": "default",\n\t\t\t"image": ' .. '"' .. CONFIG_DIR .. '/default.png",\n\t\t\t"mode": "dark"\n\t\t}\n\t]\n}'
 
     local f = assert(io.open(JSON_CONFIG_FILEPATH, "w+")) -- assertion because the file creation is forced
     f:write(rawJSON)
